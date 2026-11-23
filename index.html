@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NeuroComunica</title>
+<meta name="description" content="Cómo aprende el cerebro y cómo comunicar para que tu mensaje se quede. Novela educativa con evaluaciones.">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NeuroComunica">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>:root{--bg:#0a0a0b;--bg2:#101013;--panel:#141418;--panel2:#1b1b21;--line:#26262d;--tx:#e8e8ec;--mu:#9a9aa5;--am:#f59e0b;--amd:#b45309;--cy:#06b6d4;--cyd:#0e7490;--ok:#22c55e;--bad:#ef4444;--r:14px;
+--sat:env(safe-area-inset-top);--sab:env(safe-area-inset-bottom);--sal:env(safe-area-inset-left);--sar:env(safe-area-inset-right);
+--serif:Georgia,"Iowan Old Style","Palatino Linotype",serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}html.big{font-size:18.5px}
+body{margin:0;background:var(--bg);color:var(--tx);font:1rem/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overscroll-behavior-y:none}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--cy)}
+header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(10px + var(--sat)) calc(14px + var(--sar)) 10px calc(14px + var(--sal));background:rgba(10,10,11,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--am),var(--cy));display:grid;place-items:center;font-size:17px}
+header.top h1{font-size:1.02rem;margin:0;flex:1;letter-spacing:.3px}
+header.top h1 b{color:var(--am)}
+.ib{background:var(--panel2);border:1px solid var(--line);border-radius:10px;width:38px;height:38px;display:grid;place-items:center;font-size:17px}
+main{padding:16px calc(14px + var(--sar)) calc(96px + var(--sab)) calc(14px + var(--sal));max-width:760px;margin:0 auto}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;background:rgba(16,16,19,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px calc(4px + var(--sar)) calc(6px + var(--sab)) calc(4px + var(--sal))}
+nav.tabs button{flex:1;background:none;border:0;padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.7rem;color:var(--mu);border-radius:10px}
+nav.tabs button span{font-size:1.3rem;line-height:1}
+nav.tabs button.on{color:var(--am);background:rgba(245,158,11,.08)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.card h2,.card h3{margin:0 0 8px}
+h2{font-size:1.3rem}h3{font-size:1.08rem}
+.muted{color:var(--mu)}.small{font-size:.86rem}.mono{font-family:var(--mono)}
+.am{color:var(--am)}.cy{color:var(--cy)}.okc{color:var(--ok)}.badc{color:var(--bad)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:11px 16px;font-weight:600;min-height:46px}
+.btn.pri{background:var(--am);color:#111;border-color:var(--am)}
+.btn.sec{background:transparent;border-color:var(--cy);color:var(--cy)}
+.btn.full{width:100%}
+.btn:disabled{opacity:.4}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>.grow{flex:1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px}
+.stat b{display:block;font-family:var(--mono);font-size:1.45rem;color:var(--am)}
+.stat span{font-size:.8rem;color:var(--mu)}
+.bar{height:8px;background:var(--panel2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--am),var(--cy));border-radius:99px;transition:width .5s}
+.mod{display:flex;gap:12px;align-items:center;padding:14px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);margin-bottom:10px;width:100%;text-align:left}
+.mod .ic{font-size:1.8rem;width:50px;height:50px;border-radius:12px;background:var(--panel2);display:grid;place-items:center;flex:none}
+.mod .t{font-weight:700}.mod .s{font-size:.84rem;color:var(--mu)}
+.tag{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mu);font-family:var(--mono)}
+.tag.ok{border-color:var(--ok);color:var(--ok)}.tag.am{border-color:var(--am);color:var(--am)}
+/* lección */
+.lesson-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.dots{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 14px}
+.dots i{width:22px;height:5px;border-radius:9px;background:var(--line)}
+.dots i.r{background:var(--cyd)}.dots i.c{background:var(--am)}
+.lesson h2{font-size:1.4rem;line-height:1.25;margin:4px 0 12px}
+.lesson p,.lesson li{font-size:1.02rem}
+.lesson ul,.lesson ol{padding-left:22px}
+.lesson li{margin-bottom:6px}
+.relato{font-family:var(--serif);font-size:1.12rem;line-height:1.75}
+.relato p{margin:0 0 14px}
+.relato .dlg{font-style:italic;color:#f3e2c0;padding-left:14px;border-left:2px solid var(--amd)}
+.drop::first-letter{float:left;font-size:3.6em;line-height:.85;padding:6px 8px 0 0;color:var(--am);font-weight:700}
+.chap{font-family:var(--mono);font-size:.78rem;letter-spacing:2px;color:var(--cy);text-transform:uppercase}
+.callout{border-radius:12px;padding:12px 14px;margin:14px 0;border:1px solid}
+.callout.amber{background:rgba(245,158,11,.07);border-color:rgba(245,158,11,.35)}
+.callout.cyan{background:rgba(6,182,212,.07);border-color:rgba(6,182,212,.35)}
+.callout ul{margin:6px 0 0}
+.dato{background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(6,182,212,.06));border:1px dashed rgba(168,85,247,.5);border-radius:12px;padding:12px 14px;margin:16px 0}
+.dato h5,.tip h5{margin:0 0 4px;font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase}
+.dato h5{color:#c084fc}.tip h5{color:var(--ok)}
+.tip{background:rgba(34,197,94,.07);border-left:3px solid var(--ok);border-radius:0 12px 12px 0;padding:10px 14px;margin:16px 0}
+.gancho{font-family:var(--serif);font-style:italic;color:var(--am);font-size:1.05rem;margin:18px 0 6px;padding-top:12px;border-top:1px solid var(--line)}
+.gancho::before{content:"➜ ";font-style:normal}
+.myth{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.35);border-radius:10px;padding:10px 12px;font-style:italic}
+.bigq{font-family:var(--serif);font-size:1.35rem;text-align:center;padding:16px;border:1px solid var(--am);border-radius:12px;margin:12px 0;color:var(--am)}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.pillars div{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.pillars b{color:var(--am);display:block}.pillars span{font-size:.88rem;color:var(--mu)}
+ol.steps li::marker{color:var(--am);font-weight:700}
+.tech{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+.tech h4{margin:0 0 6px;color:var(--cy)}
+.tech .ej{font-family:var(--serif);font-style:italic;color:#f3e2c0;margin:6px 0 0}
+.tbl{width:100%;border-collapse:collapse;font-size:.88rem;margin:10px 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:7px;text-align:left;vertical-align:top}
+.tbl th{background:var(--panel2);color:var(--am)}
+.checklist h4{color:var(--cy);margin:12px 0 6px}
+.checklist label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line)}
+.checklist input{width:20px;height:20px;accent-color:var(--am);flex:none;margin-top:3px}
+.check{background:var(--bg2);border:1px solid var(--cyd);border-radius:12px;padding:12px 14px;margin-top:18px}
+.check .q{font-weight:600}.check .ans{margin-top:8px;color:var(--cy);display:none}.check.open .ans{display:block}
+.navrow{display:flex;gap:10px;margin-top:18px}.navrow .btn{flex:1}
+.speak{font-size:.85rem;padding:6px 10px;min-height:34px}
+/* widgets */
+.w{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:12px 0}
+.w svg{width:100%;height:auto;display:block}
+.zone{cursor:pointer;transition:opacity .2s;opacity:.55}.zone:hover,.zone.on{opacity:.95}
+.winfo{min-height:72px;padding:10px;border-radius:10px;background:var(--panel2);margin-top:8px;font-size:.93rem}
+.winfo b{display:block;margin-bottom:2px}
+.flow{display:flex;flex-direction:column;gap:6px}
+.flow button{display:flex;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:left}
+.flow button.on{border-color:var(--am);background:rgba(245,158,11,.08)}
+.flow .ar{text-align:center;color:var(--mu);line-height:1;font-size:.8rem}
+.flow .fi{font-size:1.4rem}
+.seg{display:flex;gap:6px;margin-top:8px}.seg button{flex:1;padding:8px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);font-size:.85rem}
+.seg button.on{border-color:var(--cy);color:var(--cy)}
+.tl{display:flex;flex-direction:column;gap:6px}
+.tl .m{display:grid;grid-template-columns:62px 1fr;gap:10px;background:var(--panel2);border-radius:10px;padding:10px;border-left:4px solid var(--am)}
+.tl .m:nth-child(even){border-left-color:var(--cy)}
+.tl .m b{font-family:var(--mono);color:var(--am)}
+/* quiz */
+.qhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.qp{font-size:1.12rem;font-weight:600;margin:8px 0 14px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;padding:13px 14px;margin-bottom:9px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);font-size:1rem}
+.opt.ok{border-color:var(--ok);background:rgba(34,197,94,.12)}
+.opt.bad{border-color:var(--bad);background:rgba(239,68,68,.12)}
+.opt.sel{border-color:var(--cy)}
+.opt:disabled{opacity:1}
+.ordlist .opt{display:flex;gap:10px;align-items:center}
+.ordlist .n{font-family:var(--mono);color:var(--am);min-width:22px}
+.fb{border-radius:12px;padding:12px;margin:10px 0;font-size:.95rem}
+.fb.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.4)}
+.fb.bad{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.4)}
+.big-score{font-family:var(--mono);font-size:3rem;font-weight:800;text-align:center;color:var(--am);line-height:1.1}
+/* flashcards */
+.flash{perspective:1000px;height:260px;margin:12px 0}
+.flash .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .in{transform:rotateY(180deg)}
+.flash .fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid var(--line)}
+.flash .front{background:linear-gradient(160deg,var(--panel2),var(--panel));font-size:1.2rem;font-weight:700}
+.flash .back{background:linear-gradient(160deg,#0b2a30,var(--panel));transform:rotateY(180deg);font-size:1.02rem}
+.flash small{position:absolute;top:10px;left:14px;font-size:.72rem;color:var(--mu);font-family:var(--mono)}
+.boxes{display:flex;gap:6px}.boxes div{flex:1;text-align:center;background:var(--panel2);border-radius:10px;padding:8px 2px;border:1px solid var(--line)}
+.boxes b{display:block;font-family:var(--mono);color:var(--cy);font-size:1.1rem}.boxes span{font-size:.7rem;color:var(--mu)}
+/* forms */
+label.f{display:block;font-size:.85rem;color:var(--mu);margin:10px 0 4px}
+input.t,textarea.t,select.t{width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px;color:var(--tx);font:inherit}
+textarea.t{min-height:70px;resize:vertical}
+.rub{border-bottom:1px solid var(--line);padding:10px 0}
+.rub .lv{display:flex;gap:6px;margin-top:6px}
+.rub .lv button{flex:1;padding:8px 0;border-radius:9px;border:1px solid var(--line);background:var(--panel2);font-family:var(--mono)}
+.rub .lv button.on{background:var(--am);color:#111;border-color:var(--am)}
+.sw{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.tg{width:50px;height:28px;border-radius:99px;background:var(--line);position:relative;border:0;flex:none}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.tg.on{background:var(--am)}.tg.on::after{left:25px}
+.toast{position:fixed;left:50%;bottom:calc(90px + var(--sab));transform:translateX(-50%);background:var(--panel2);border:1px solid var(--am);padding:10px 16px;border-radius:12px;z-index:50;font-size:.92rem;max-width:90vw;animation:tin .25s}
+@keyframes tin{from{opacity:0;transform:translate(-50%,10px)}}
+.ring{width:110px;height:110px;flex:none}
+.hero{display:flex;gap:16px;align-items:center}
+.chart{width:100%;height:auto}
+.fade{animation:fd .3s}@keyframes fd{from{opacity:0;transform:translateY(6px)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:60;display:grid;place-items:center;padding:calc(20px + var(--sat)) 16px calc(20px + var(--sab))}
+.modal .card{max-width:520px;width:100%;max-height:85vh;overflow:auto}
+pre.guion{white-space:pre-wrap;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--mono);font-size:.85rem}
+</style>
+</head>
+<body>
+<header class="top"><div class="logo">🧠</div><h1>Neuro<b>Comunica</b></h1><button class="ib" onclick="go('ajustes')" aria-label="Ajustes">⚙️</button></header>
+<main id="view"></main>
+<nav class="tabs">
+<button data-go="inicio"><span>🏠</span>Inicio</button>
+<button data-go="aprender"><span>📖</span>Aprender</button>
+<button data-go="evaluar"><span>📊</span>Evaluar</button>
+<button data-go="repasar"><span>🗂️</span>Repasar</button>
+<button data-go="charla"><span>🎤</span>Charla</button>
+</nav>
+<script>/* NeuroComunica: contenido educativo narrativo
+   Estructura por módulo: relato (capítulo de la novela), secciones [{t,h,dato,tip,gancho,check}], claves, quiz, cartas
+   Tipos de pregunta: mc (c = índice correcto), vf (c = true/false), orden (items en orden correcto)
+   d:true marca las preguntas del diagnóstico (se repiten en el examen final para medir ganancia)
+   Personajes y hechos de los relatos: ficticios. Datos insólitos: estudios reales citados por autor y año. */
+
+const MODULOS = [
+/* ================= MÓDULO 1 ================= */
+{
+id:'m1', icono:'🧠', titulo:'El cerebro que aprende', sub:'Las piezas clave y qué hace cada una', min:12,
+relato:{t:'Capítulo 1 · La charla que nadie recordó', h:`
+<p class="drop">Tres días después de su primera charla de seguridad, Rosa Pinedo descubrió que nadie recordaba una sola palabra. Lo supo a las seis y cuarenta de la mañana, con el café todavía quemándole la lengua, cuando le preguntó a Teodoro Huaymacari de qué había tratado.</p>
+<p>Teodoro llevaba veintidós años operando la grúa del muelle. Se rascó la nuca debajo del casco, miró el río como si la respuesta flotara en el agua marrón, y dijo:</p>
+<p class="dlg">«Algo de los cascos, ¿no, inge?»</p>
+<p>La charla había sido sobre línea de fuego. Catorce minutos. Once normas. Diecinueve láminas que Rosa leyó una por una, con la voz firme que había ensayado frente al espejo del contenedor. Veintiocho firmas en la lista. Cero recuerdos.</p>
+<p>Esa noche no durmió. Daba vueltas en el catre con una pregunta que le pareció una ofensa personal: ¿por qué Teodoro recordaba con lujo de detalles el día de 2009 en que un grillete reventó y pasó silbando a un metro de su cabeza, y no recordaba nada de lo que ella había dicho tres días antes?</p>
+<p>La respuesta, aunque Rosa todavía no lo sabía, estaba escondida a tres centímetros detrás de los ojos de Teodoro. Y empezaba con una trocha.</p>
+<p class="muted small">Rosa, Teodoro y los demás personajes son ficticios. Los datos científicos de cada sección son reales.</p>`},
+secciones:[
+{t:'Una red que se reconstruye', h:`
+<p>Dentro de tu cabeza viven unos <b>86 mil millones de neuronas</b>. Cada una se conecta con miles de otras a través de puntos de contacto llamados <b>sinapsis</b>. En total, unos 100 billones de conexiones. Más que estrellas en la Vía Láctea.</p>
+<p>Aprender consiste en <b>cambiar esas conexiones</b>: algunas se fortalecen, otras nacen, otras se debilitan hasta desaparecer. A esa capacidad de cambio la llamamos <b>plasticidad</b>.</p>
+<div class="callout amber"><b>Regla de Hebb:</b> las neuronas que se activan juntas se conectan entre sí. Cada vez que repites algo prestando atención, ese circuito se vuelve más fuerte y más rápido.</div>
+<div class="callout cyan"><b>🌿 Piénsalo como una trocha en la selva.</b> La primera vez abres camino a machete y sudas. Si pasas todos los días, se vuelve sendero. Si dejas de pasar, el monte lo cubre en semanas. Teodoro había recorrido la trocha del grillete mil veces, contándola en cada reunión. La charla de Rosa fue un machetazo solitario.</div>`,
+dato:'Santiago Ramón y Cajal, el español que ganó el Nobel de Medicina en 1906, fue el primero en demostrar que el cerebro está hecho de neuronas separadas. Pasaba noches dibujándolas a mano en su microscopio y las llamaba «las mariposas del alma». Sus dibujos todavía se usan en las clases de neurociencia.',
+tip:'Cuando quieras que algo se quede, haz que tu público lo use al menos tres veces en la misma charla: lo escucha, lo dice y lo muestra.',
+gancho:'Pero ¿dónde exactamente se guardó el grillete de Teodoro? Hay un mapa.',
+check:{p:'¿Qué cambia físicamente en tu cerebro cuando aprendes algo?', r:'Cambian las conexiones entre neuronas (sinapsis): se fortalecen, se crean nuevas o se debilitan las que no usas.'}},
+{t:'El mapa: quién hace qué', h:`
+<p>Toca cada zona del dibujo para ver su función en el aprendizaje.</p>
+<div data-widget="cerebro"></div>
+<p>Si pudieras abrir la cabeza de Teodoro en el momento del grillete, verías a la <b>amígdala</b> disparar la alarma, al <b>hipocampo</b> grabando todo con prioridad máxima y a la <b>corteza prefrontal</b> apagándose un instante mientras el cuerpo se agachaba solo.</p>
+<p class="muted small">Ojo: ninguna zona trabaja sola. Funcionan como equipos conectados (redes). El mapa simplifica para que lo recuerdes.</p>`,
+dato:'En 1848, en Vermont, una barra de hierro de un metro atravesó la cabeza del capataz ferroviario Phineas Gage y le destruyó parte de la corteza prefrontal. Sobrevivió, conversaba y caminaba. Pero los registros de la época dicen que el hombre responsable y ordenado se volvió impulsivo e incapaz de planificar. Fue una de las primeras pistas de que la prefrontal es el "jefe de turno" del cerebro. Los historiadores creen que su caso se exageró con los años, pero el cambio inicial está documentado.',
+tip:'Si tu público acaba de vivir un susto (un casi accidente esa mañana), espera unos minutos antes de explicar algo complejo: la amígdala todavía tiene el control.',
+gancho:'El mapa explica dónde. Falta el combustible: cuatro sustancias deciden qué se graba y qué se borra.',
+check:{p:'¿Qué estructura actúa como "archivador" que convierte la experiencia en recuerdo duradero?', r:'El hipocampo. Registra lo nuevo y, sobre todo durante el sueño, ayuda a transferirlo a la corteza.'}},
+{t:'La química del aprendizaje', h:`
+<p>Cuatro mensajeros químicos deciden en gran parte qué se graba:</p>
+<ul>
+<li><b>Dopamina:</b> se libera cuando algo resulta mejor o distinto de lo esperado, o cuando anticipas una recompensa. Te empuja a buscar. La curiosidad la enciende.</li>
+<li><b>Noradrenalina:</b> el estado de alerta. Un poco te despierta; demasiado te pone tenso.</li>
+<li><b>Acetilcolina:</b> afina la atención y abre la puerta a la plasticidad.</li>
+<li><b>Cortisol:</b> la hormona del estrés. Breve y moderado ayuda a fijar lo importante. Alto y sostenido apaga la corteza prefrontal y daña el hipocampo.</li>
+</ul>
+<p>El grillete de Teodoro le dio una dosis perfecta: un segundo de terror, ningún daño, y veintidós años de historia para contar. La charla de Rosa le dio cero sorpresa, cero curiosidad y catorce minutos de voz pareja. Química plana.</p>
+<div class="callout amber"><b>Conclusión práctica:</b> curiosidad y algo de reto ayudan. Amenaza, gritos y humillación bloquean.</div>`,
+dato:'En los años 90, Wolfram Schultz midió neuronas de dopamina en monos que recibían jugo después de una luz. Al principio, la dopamina se disparaba con el jugo. Cuando el mono aprendió la secuencia, se disparaba con la luz, antes del premio. Y si el jugo no llegaba, la actividad caía por debajo de lo normal. La dopamina responde a la anticipación y a la sorpresa más que al premio mismo.',
+tip:'Anuncia al inicio que al final habrá algo ("al final les muestro el grillete que reventó"). La anticipación mantiene la atención durante toda la charla.',
+gancho:'Y hay un detalle que explica por qué la gente "firma y se va": tu cerebro es un tacaño profesional.',
+check:{p:'¿Qué pasa con el aprendizaje cuando una persona está bajo estrés intenso y prolongado?', r:'El cortisol alto bloquea la corteza prefrontal (atención y razonamiento) y perjudica al hipocampo, así que aprende y recuerda peor.'}},
+{t:'Un cerebro que ahorra energía', h:`
+<p>Tu cerebro pesa alrededor del <b>2% de tu cuerpo</b> y consume cerca del <b>20% de tu energía</b>. Por eso busca ahorrar siempre que puede:</p>
+<ul>
+<li><b>Filtra:</b> descarta casi todo lo que llega a tus sentidos.</li>
+<li><b>Automatiza:</b> lo que repites muchas veces pasa a los ganglios basales y al cerebelo, y se vuelve hábito. Ya no necesita pensarse.</li>
+</ul>
+<p>A las seis y media de la mañana, con el motor de la chata rugiendo, el cerebro de cada trabajador hizo una cuenta rápida durante la charla de Rosa: «esto se parece a las otras cien charlas». Y activó el piloto automático.</p>
+<div class="callout cyan"><b>⛑️ En campo:</b> escuchar una norma no la vuelve hábito. La conducta segura se automatiza con práctica repetida y retroalimentación, igual que aprendiste a manejar. Una charla abre el camino; la práctica lo pavimenta.</div>`,
+dato:'Tu cerebro funciona con unos 20 vatios, menos que un foco ahorrador. Con esa energía coordina 86 mil millones de neuronas. Una supercomputadora que intenta simular una fracción de esa actividad consume millones de vatios.',
+tip:'Rompe el patrón de "otra charla más" cambiando algo visible: el lugar, la hora, quién habla primero o un objeto en tus manos. El cerebro desactiva el piloto automático cuando detecta algo distinto.',
+gancho:'Quedaba una duda que Rosa no se atrevía a decir en voz alta: ¿y si Teodoro, con 54 años, ya no podía aprender nada nuevo?',
+check:{p:'¿Por qué una charla sola no basta para crear una conducta segura automática?', r:'Porque los hábitos se forman con repetición de la acción (ganglios basales y cerebelo). La charla da información; la práctica repetida con retroalimentación automatiza la conducta.'}},
+{t:'Se aprende a cualquier edad', h:`
+<p>La plasticidad dura toda la vida. Un adulto aprende algunas cosas más lento que un niño, pero tiene una ventaja enorme: <b>conocimiento previo</b> donde anclar lo nuevo.</p>
+<p>Lo nuevo se graba mejor cuando se <b>conecta con algo que ya sabes</b>. Teodoro no necesitaba que le explicaran la física de una carga suspendida. Necesitaba que alguien le dijera: «¿te acuerdas del grillete de 2009? Esto es lo mismo, pero con la eslinga».</p>
+<div class="callout amber"><b>Pregunta de oro para enseñar adultos:</b> "¿A qué se parece esto que ya conoces?"</div>`,
+dato:'En el año 2000, Eleanor Maguire escaneó el cerebro de taxistas de Londres, que estudian unos cuatro años para memorizar 25 mil calles. Tenían más grande la parte posterior del hipocampo que el resto de personas, y cuantos más años de oficio, más grande. Años después, su equipo siguió a aprendices antes y después del examen: los que aprobaron mostraron ese crecimiento; los que abandonaron, no.',
+tip:'Antes de enseñar algo a un veterano, pregúntale cómo lo hacía antes. Te da el ancla y, de paso, lo convierte en aliado en vez de juez.',
+gancho:'Rosa ya sabía qué partes tenía el cerebro. Le faltaba entender el viaje completo de un recuerdo. Y el martes siguiente, un casi accidente se lo iba a enseñar.',
+check:{p:'¿Cuál es la principal ventaja de un adulto al aprender algo nuevo?', r:'Su conocimiento previo: tiene más "ganchos" donde conectar la información nueva.'}}
+],
+claves:['Aprender = cambiar conexiones entre neuronas (plasticidad).','Lo que se usa se fortalece; lo que no se usa se debilita.','Hipocampo graba, amígdala marca lo emocional, prefrontal sostiene la atención.','Curiosidad y anticipación ayudan; miedo intenso bloquea.','Los hábitos se forman haciendo, no solo escuchando.'],
+quiz:[
+{t:'mc',d:true,p:'¿Qué significa "aprender" a nivel del cerebro?',o:['Llenar neuronas vacías con datos','Modificar las conexiones entre neuronas','Usar un porcentaje mayor del cerebro','Activar solo el hemisferio izquierdo'],c:1,e:'Aprender es plasticidad sináptica: fortalecer, crear o debilitar conexiones.'},
+{t:'mc',d:true,p:'¿Qué zona participa más directamente en convertir lo vivido en un recuerdo duradero?',o:['Cerebelo','Hipocampo','Tronco encefálico','Corteza visual'],c:1,e:'El hipocampo registra la experiencia y ayuda a consolidarla en la corteza.'},
+{t:'vf',p:'Según los experimentos de Schultz, la dopamina responde sobre todo a la anticipación y a la sorpresa, más que al premio en sí.',c:true,e:'Una vez aprendida la señal, la dopamina se dispara con la señal, antes del premio.'},
+{t:'mc',p:'Un supervisor grita y humilla durante la capacitación. ¿Qué ocurre en el cerebro de los oyentes?',o:['Aprenden más rápido por la presión','El estrés alto bloquea la corteza prefrontal y aprenden peor','No hay efecto','Mejora la memoria a largo plazo de toda la charla'],c:1,e:'El estrés intenso apaga el razonamiento y la atención flexible; la gente se defiende en vez de aprender.'},
+{t:'mc',p:'Según la regla de Hebb:',o:['Las neuronas que se activan juntas se conectan','Cada neurona guarda un recuerdo','El cerebro no cambia después de los 25 años','Solo se aprende durmiendo'],c:0,e:'"Neuronas que disparan juntas se conectan": la base del aprendizaje asociativo.'},
+{t:'mc',p:'¿Qué demostró el estudio de los taxistas de Londres?',o:['Que manejar daña la memoria','Que el hipocampo crece con el entrenamiento intenso de la memoria espacial, incluso en adultos','Que los adultos no aprenden calles nuevas','Que la memoria es genética'],c:1,e:'La parte posterior del hipocampo era mayor y crecía con los años de oficio: plasticidad adulta.'},
+{t:'mc',p:'¿Qué estructuras se encargan de automatizar habilidades y hábitos?',o:['Amígdala e hipocampo','Ganglios basales y cerebelo','Tálamo y retina','Corteza auditiva'],c:1,e:'Ganglios basales y cerebelo convierten acciones repetidas en rutinas automáticas.'},
+{t:'mc',p:'¿Por qué el cerebro filtra y automatiza tanto?',o:['Porque es perezoso por naturaleza','Porque consume mucha energía (cerca del 20%) y necesita ahorrar','Porque solo usa el 10%','Por la edad'],c:1,e:'Pesa 2% y gasta cerca del 20% de la energía: filtrar y automatizar le ahorra recursos.'},
+{t:'mc',p:'¿Qué región se dañó en Phineas Gage y qué función perdió en gran parte?',o:['Cerebelo: equilibrio','Corteza prefrontal: planificación y control de impulsos','Corteza visual: la vista','Hipocampo: memoria de largo plazo'],c:1,e:'La barra dañó la prefrontal; se volvió impulsivo y desorganizado.'}
+],
+cartas:[
+{f:'¿Qué es la plasticidad?',b:'La capacidad del cerebro de cambiar sus conexiones con la experiencia. Es la base del aprendizaje.'},
+{f:'Regla de Hebb',b:'Las neuronas que se activan juntas se conectan entre sí.'},
+{f:'Función del hipocampo',b:'Registrar lo nuevo y ayudar a consolidarlo como recuerdo duradero.'},
+{f:'Función de la amígdala',b:'Detectar lo emocional y lo amenazante, y marcar esos recuerdos como importantes.'},
+{f:'Efecto del estrés intenso',b:'Bloquea la corteza prefrontal y perjudica al hipocampo: se aprende y se recuerda peor.'},
+{f:'¿Dónde se forman los hábitos?',b:'En los ganglios basales y el cerebelo, con repetición de la acción.'},
+{f:'Taxistas de Londres (Maguire, 2000)',b:'Su hipocampo posterior era más grande y crecía con los años de oficio: el cerebro adulto cambia.'}
+]
+},
+
+/* ================= MÓDULO 2 ================= */
+{
+id:'m2', icono:'💾', titulo:'Cómo se forma un recuerdo', sub:'De lo que oyes a lo que recuerdas meses después', min:14,
+relato:{t:'Capítulo 2 · Dos testigos, dos verdades', h:`
+<p class="drop">El martes, a las diez y doce de la mañana, una tubería de seis metros giró sola en el aire y rozó el pasamanos de la chata. No hubo heridos. Hubo dos testigos.</p>
+<p>Wilder, el rigger más joven, juró que la tubería había girado porque el viento la empujó. Don Augusto, el vigía, juró que había girado porque nadie sujetaba el viento, la soga guía. Los dos estaban a cinco metros. Los dos vieron lo mismo. Los dos contaron una película distinta.</p>
+<p>Rosa los entrevistó juntos, en el comedor, una hora después. Error. Al final de la conversación, Wilder ya decía «puede ser que la soga estaba suelta, ¿no?», y Don Augusto había agregado una ráfaga de viento que al principio no mencionó.</p>
+<p>Esa noche, mientras llenaba el reporte, Rosa entendió algo incómodo. Si la memoria de dos hombres honestos se podía moldear en una hora de conversación, ¿qué quedaba de su charla de catorce minutos en la cabeza de veintiocho personas medio dormidas?</p>
+<p>Abrió su laptop y escribió en el buscador: <i>cómo se forma un recuerdo</i>. Lo que encontró la tuvo despierta hasta la una.</p>`},
+secciones:[
+{t:'Las 5 etapas de un recuerdo', h:`
+<p>Todo lo que aprendes recorre este camino. Toca cada etapa:</p>
+<div data-widget="memoria"></div>
+<div class="callout amber">Si una etapa falla, el recuerdo no llega. La charla de Rosa falló en la primera (nadie atendió) y en la cuarta (nadie repasó). Fallar en dos etapas de cinco es un examen jalado.</div>`,
+dato:'En 1975, Godden y Baddeley pusieron a buzos a memorizar palabras en tierra o bajo el agua. Recordaban mejor cuando el examen se hacía en el mismo lugar donde aprendieron. El contexto se graba junto con el recuerdo y luego sirve de llave para recuperarlo.',
+tip:'Da la charla en el lugar donde ocurrirá la conducta. Una charla de izaje junto a la grúa deja más llaves de recuerdo que la misma charla en el comedor.',
+gancho:'La primera etapa tiene trampa: la mesa donde trabajas los recuerdos es ridículamente pequeña.',
+check:{p:'Nombra las 5 etapas en orden.', r:'Atención → Memoria de trabajo → Codificación → Consolidación → Recuperación.'}},
+{t:'Memoria de trabajo: una mesa pequeña', h:`
+<p>La memoria de trabajo es tu mesa de trabajo mental. Ahí sostienes lo que piensas ahora mismo. Problema: <b>es pequeña</b>. La mayoría de personas maneja unas <b>4 unidades</b> a la vez.</p>
+<p>Rosa puso once normas sobre esa mesa en catorce minutos. Las primeras se cayeron al piso antes de que llegara la sexta.</p>
+<div class="callout cyan"><b>Truco: agrupa (chunking).</b> Un celular de 9 dígitos se recuerda como 3 grupos de 3. Diez normas se recuerdan mejor como 3 grupos: "antes, durante y después de la maniobra".</div>`,
+dato:'En 1973, Chase y Simon mostraron tableros de ajedrez durante 5 segundos. Los maestros reconstruían casi todas las piezas; los novatos, unas pocas. Pero cuando las piezas se colocaban al azar, sin lógica de partida, los maestros recordaban igual de poco que los novatos. Su ventaja estaba en agrupar: veían "jugadas" donde el novato veía piezas sueltas.',
+tip:'Ponle nombre corto a cada grupo de ideas ("las 3 M: mira, mide, muévete"). Un grupo con nombre ocupa un solo espacio en la mesa.',
+gancho:'Lo que sobrevive a la mesa se guarda en tres archivadores distintos. Y uno de ellos no entiende palabras.',
+check:{p:'¿Cuántas unidades de información sostiene la memoria de trabajo, aproximadamente?', r:'Alrededor de 4. Por eso conviene agrupar la información en bloques.'}},
+{t:'Tipos de memoria a largo plazo', h:`
+<ul>
+<li><b>Episódica:</b> lo que te pasó ("el día que giró la tubería").</li>
+<li><b>Semántica:</b> datos y conceptos ("la carga máxima de esta eslinga es 2 t").</li>
+<li><b>Procedimental:</b> cómo se hace algo ("colocarse el arnés"). Se aprende <b>haciendo</b> y casi no se puede explicar con palabras.</li>
+</ul>
+<div class="callout amber"><b>Consecuencia directa:</b> una habilidad (amarrar, inspeccionar, usar un extintor) exige práctica. Una exposición oral solo crea memoria semántica: el trabajador "sabe" pero no "sabe hacer".</div>
+<div class="callout cyan">Las historias activan la memoria episódica, que es más rica y más fácil de recuperar que un dato suelto. Por eso Teodoro recuerda el grillete y olvida la norma.</div>`,
+dato:'En 1953, para curar su epilepsia, a Henry Molaison le extirparon ambos hipocampos. Desde ese día no pudo formar recuerdos nuevos de hechos: trató con los mismos investigadores durante décadas y cada vez los saludaba como a desconocidos. La psicóloga Brenda Milner le pidió dibujar una estrella mirando solo su reflejo en un espejo. Día tras día, mejoró como cualquiera. Y cada día juraba que nunca lo había intentado. Su mano aprendía; su mente no se enteraba.',
+tip:'Para habilidades, la mitad del tiempo de la capacitación debe ser práctica con las manos. Si no hay tiempo para practicar, no prometas que aprendieron la habilidad.',
+gancho:'Ahora viene la parte cruel: cuánto se pierde, y en cuánto tiempo.',
+check:{p:'¿Qué tipo de memoria necesitas para que alguien sepa colocarse bien un arnés?', r:'Procedimental. Se construye practicando la acción con retroalimentación, no solo escuchando.'}},
+{t:'La curva del olvido', h:`
+<p>En 1885, Hermann Ebbinghaus se usó a sí mismo como conejillo de Indias. Midió cuánto olvidaba con el tiempo y encontró que <b>la mayor pérdida ocurre en las primeras horas y días</b>. Después, la caída se vuelve más lenta.</p>
+<div data-widget="olvido"></div>
+<p>Cada vez que <b>recuperas</b> la información (no cuando la relees), la curva se aplana. Con 3 o 4 repasos espaciados el recuerdo dura meses.</p>`,
+dato:'El psicólogo ruso Alexander Luria estudió durante 30 años a Solomón Shereshevski, un periodista que no podía olvidar: recordaba listas de cientos de palabras años después. Parece un superpoder, pero le arruinaba la vida. No podía distinguir lo importante de lo trivial, y le costaba entender metáforas porque cada palabra le traía una imagen imposible de borrar. Olvidar es una función útil: limpia la mesa para lo que importa.',
+tip:'El repaso que más rinde es el primero, al día siguiente. Una pregunta de 1 minuto en la charla del día siguiente ("¿qué dijimos ayer de la soga guía?") vale más que media hora un mes después.',
+gancho:'Hay un repaso que ocurre sin que hagas nada. Sucede todas las noches, mientras roncas.',
+check:{p:'¿Cuándo ocurre la mayor pérdida de lo aprendido?', r:'En las primeras horas y días después de aprenderlo. Por eso el primer repaso conviene hacerlo pronto (al día siguiente).'}},
+{t:'Dormir para recordar', h:`
+<p>Durante el sueño profundo, el hipocampo <b>"reproduce"</b> lo vivido en el día y lo transfiere a la corteza. Así se consolida el recuerdo y se conecta con lo que ya sabías.</p>
+<ul>
+<li>Quien duerme mal, consolida mal.</li>
+<li>El sueño después de aprender importa tanto como el sueño antes.</li>
+</ul>
+<div class="callout cyan"><b>⛑️ En campo:</b> evita programar una capacitación importante al final de un turno nocturno o tras una jornada pesada bajo el sol. El cerebro fatigado atiende y graba peor.</div>`,
+dato:'En 1994, Wilson y McNaughton registraron neuronas del hipocampo de ratas que recorrían un laberinto. Cada lugar activaba una secuencia de neuronas. Cuando las ratas dormían, esas mismas secuencias volvían a dispararse en el mismo orden, como si repasaran el recorrido. Las ratas literalmente sueñan con el laberinto.',
+tip:'Si das una capacitación importante, procura que haya una noche de sueño antes del examen o la práctica final. Evaluar el mismo día mide lo que entró, no lo que se quedó.',
+gancho:'Y aquí volvemos a Wilder y Don Augusto. Porque cuando el recuerdo vuelve, no vuelve intacto.',
+check:{p:'¿Qué hace el cerebro con lo aprendido mientras duermes?', r:'Lo consolida: el hipocampo reproduce lo vivido y lo transfiere y conecta con la corteza.'}},
+{t:'Recordar es reconstruir', h:`
+<p>Un recuerdo no se guarda como un video. Cada vez que recuerdas, tu cerebro <b>lo reconstruye</b> con piezas sueltas, y en ese proceso puede deformarlo, llenar huecos o mezclarlo con lo que otros dijeron.</p>
+<p>Wilder no mintió cuando empezó a dudar de la soga. Su cerebro rellenó un hueco con la versión de Don Augusto, y la versión nueva se sintió igual de real que la original.</p>
+<div class="callout amber"><b>⛑️ Aplicación en investigación de incidentes:</b>
+<ul><li>Entrevista a los testigos lo antes posible y por separado.</li>
+<li>Empieza con preguntas abiertas ("cuéntame qué viste").</li>
+<li>Evita preguntas que sugieran ("¿el operador iba rápido, verdad?").</li></ul></div>`,
+dato:'En 1974, Elizabeth Loftus y John Palmer mostraron videos de choques de autos. Luego preguntaron: «¿a qué velocidad iban los autos cuando se estrellaron?». A otro grupo le cambiaron solo el verbo: «cuando se tocaron». Los del verbo "estrellaron" calcularon velocidades unos 14 km/h más altas. Una semana después, en el grupo del verbo "estrellaron" hubo más del doble de personas que recordaban vidrios rotos, que nunca aparecieron en el video.',
+tip:'En la entrevista a testigos, usa verbos neutros: "¿qué pasó con la tubería?" en vez de "¿cómo golpeó la tubería?". Cada palabra tuya puede quedar grabada en su recuerdo.',
+gancho:'Rosa cerró la laptop a la una de la mañana con una certeza: sabía por qué había fallado. Ahora necesitaba saber qué funciona. Y la respuesta la encontró, de todos los lugares posibles, en el cuaderno de su sobrino.',
+check:{p:'¿Por qué conviene entrevistar a los testigos de un incidente pronto y por separado?', r:'Porque la memoria se reconstruye cada vez y puede contaminarse con el tiempo y con lo que dicen otros.'}}
+],
+claves:['Atención → trabajo → codificación → consolidación → recuperación.','La memoria de trabajo sostiene unas 4 cosas: agrupa.','Las habilidades necesitan memoria procedimental: práctica.','La mayor parte del olvido ocurre en los primeros días.','El sueño consolida; el recuerdo se reconstruye cada vez.','El contexto donde aprendes sirve de llave para recordar.'],
+quiz:[
+{t:'orden',d:true,p:'Ordena las etapas de formación de un recuerdo:',items:['Atención','Memoria de trabajo','Codificación','Consolidación','Recuperación'],e:'Sin atención nada entra; sin consolidación nada dura; sin recuperación no lo usas.'},
+{t:'mc',d:true,p:'En una charla de 5 minutos das 10 normas seguidas. ¿Qué es lo más probable?',o:['Las recordarán todas','Recordarán pocas porque la memoria de trabajo sostiene unas 4 cosas','Recordarán solo las del medio','Depende del estilo de aprendizaje de cada uno'],c:1,e:'La memoria de trabajo es limitada: hay que priorizar y agrupar.'},
+{t:'mc',p:'Henry Molaison mejoró al dibujar en espejo, pero no recordaba haberlo practicado. ¿Qué demuestra?',o:['Que mentía','Que la memoria procedimental funciona aparte de la memoria de hechos','Que el hipocampo controla los movimientos','Que dibujar no requiere memoria'],c:1,e:'Sin hipocampo no formaba recuerdos de hechos, pero su memoria procedimental seguía aprendiendo.'},
+{t:'vf',p:'Según la curva del olvido, la mayor pérdida de información ocurre en las primeras horas y días.',c:true,e:'La pendiente es máxima al inicio; luego se estabiliza.'},
+{t:'mc',p:'¿Qué aplana más la curva del olvido?',o:['Releer la presentación varias veces','Recuperar la información de memoria en repasos espaciados','Subrayar con colores','Escuchar la misma charla grabada'],c:1,e:'La recuperación activa y espaciada fortalece el recuerdo mucho más que releer.'},
+{t:'mc',p:'Los maestros de ajedrez recuerdan tableros de partidas reales, pero no tableros al azar. ¿Por qué?',o:['Tienen mejor vista','Agrupan las piezas en patrones con sentido (chunking)','Tienen más neuronas','Por suerte'],c:1,e:'Su ventaja es agrupar en patrones; sin patrones, la mesa es igual de pequeña para todos.'},
+{t:'vf',p:'Un recuerdo funciona como un video fiel que se reproduce igual cada vez.',c:false,e:'Se reconstruye cada vez y puede deformarse.'},
+{t:'mc',p:'¿Cuál es la mejor práctica al entrevistar testigos de un incidente?',o:['Reunirlos para que se pongan de acuerdo','Preguntar "¿iba rápido, verdad?" para ir al grano','Entrevistarlos pronto, por separado y con preguntas abiertas','Esperar una semana a que se calmen'],c:2,e:'Así reduces la contaminación de la memoria reconstructiva.'},
+{t:'mc',p:'Los buzos de Godden y Baddeley recordaban mejor en el mismo lugar donde aprendieron. ¿Qué aplicas en SST?',o:['Capacitar siempre en el comedor','Dar la charla en el lugar donde ocurrirá la conducta','Capacitar bajo el agua','Cambiar de lugar cada día'],c:1,e:'El contexto se graba con el recuerdo y luego ayuda a recuperarlo.'}
+],
+cartas:[
+{f:'Las 5 etapas del recuerdo',b:'Atención, memoria de trabajo, codificación, consolidación y recuperación.'},
+{f:'Capacidad de la memoria de trabajo',b:'Alrededor de 4 unidades. Agrupa la información en bloques.'},
+{f:'Memoria procedimental',b:'Guarda cómo se hacen las cosas. Se aprende practicando. Caso H.M.: aprendía con la mano sin recordarlo.'},
+{f:'Curva del olvido (Ebbinghaus)',b:'La mayor pérdida ocurre en las primeras horas y días; los repasos espaciados la aplanan.'},
+{f:'¿Qué hace el sueño?',b:'Consolida: el hipocampo reproduce lo vivido y lo integra en la corteza.'},
+{f:'Memoria reconstructiva (Loftus)',b:'Cada recuerdo se rearma al evocarlo. Un solo verbo en la pregunta puede deformarlo.'},
+{f:'Memoria dependiente del contexto',b:'Se recuerda mejor en el lugar donde se aprendió (buzos de Godden y Baddeley).'}
+]
+},
+
+/* ================= MÓDULO 3 ================= */
+{
+id:'m3', icono:'🛠️', titulo:'Estrategias que sí funcionan', sub:'Lo que la ciencia demuestra para aprender mejor', min:14,
+relato:{t:'Capítulo 3 · El cuaderno del sobrino', h:`
+<p class="drop">Rosa había estudiado toda su vida de la misma manera: resaltador amarillo, tres relecturas, café. Así sacó su título, así preparó la charla que nadie recordó, y así se preparaba, durante su descanso en Iquitos, para el examen de una certificación en gestión de riesgos.</p>
+<p>Tres semanas resaltando. El libro parecía un plátano maduro. Se sentía segura. Lo sabía todo.</p>
+<p>Jaló el examen con 11.</p>
+<p>Esa tarde, en la casa de su hermana en Punchana, su sobrino Kevin, de catorce años, estudiaba para un examen de ciencias con una cajita de zapatos llena de tarjetas. Leía la pregunta, cerraba los ojos, decía la respuesta en voz alta, volteaba la tarjeta. Si acertaba, la tarjeta pasaba a otro compartimiento. Si fallaba, volvía al primero.</p>
+<p class="dlg">«¿Y eso quién te enseñó?», le preguntó Rosa, entre burlona y picada.</p>
+<p class="dlg">«Mi profesora de biología. Dice que releer es para flojos, tía.»</p>
+<p>Rosa se rió. Al día siguiente buscó en internet si la profesora tenía razón. Tenía razón. Y la evidencia era tan contundente que le dio vergüenza haber llegado a los treinta y dos años sin saberlo.</p>`},
+secciones:[
+{t:'Los 4 pilares del aprendizaje', h:`
+<p>El neurocientífico francés Stanislas Dehaene resume décadas de investigación en <b>4 pilares</b>. Si falta uno, el aprendizaje cojea:</p>
+<div class="pillars">
+<div><b>1. Atención</b><span>Lo que no se atiende no se procesa.</span></div>
+<div><b>2. Compromiso activo</b><span>El cerebro pasivo apenas aprende. Hay que pensar, predecir, responder.</span></div>
+<div><b>3. Retroalimentación del error</b><span>Equivocarse y saber por qué corrige el modelo mental.</span></div>
+<div><b>4. Consolidación</b><span>Repetición espaciada y sueño convierten lo frágil en duradero.</span></div>
+</div>
+<p>La cajita de Kevin cumplía los cuatro. El resaltador de Rosa, apenas el primero, y a medias.</p>`,
+dato:'Los bebés de pocos meses ya aplican el pilar 3. En experimentos de "violación de expectativa", miran más tiempo una escena imposible (un juguete que atraviesa una pared) que una posible. El cerebro humano viene programado para prestar atención a sus propios errores de predicción.',
+tip:'En cada charla, pide al público que prediga antes de explicar: "¿qué creen que pasa si la eslinga roza esta arista?". Predecir activa el compromiso y prepara al cerebro para el error.',
+gancho:'De los cuatro pilares, hay una técnica que los activa todos a la vez. Y es la que Kevin usaba sin saber su nombre.',
+check:{p:'¿Cuáles son los 4 pilares del aprendizaje según Dehaene?', r:'Atención, compromiso activo, retroalimentación del error y consolidación.'}},
+{t:'Práctica de recuperación', h:`
+<p>Sacar la información de tu cabeza la fortalece más que volver a meterla. A esto se le llama <b>efecto de prueba</b>.</p>
+<p>En un estudio clásico (Roediger y Karpicke, 2006), quienes se autoevaluaron recordaban bastante más a la semana que quienes releyeron el texto. Y aquí viene lo cruel: los que releían <b>se sentían más seguros</b>. Igual que Rosa antes de jalar.</p>
+<div class="callout amber"><b>Ilusión de fluidez:</b> releer se siente fácil y por eso parece que ya lo sabes. Que algo te resulte familiar no significa que puedas recordarlo cuando lo necesitas.</div>
+<p><b>Cómo aplicarlo:</b> cierra el material y pregúntate. Usa tarjetas. En una charla, pregunta en vez de repetir.</p>`,
+dato:'Decir las cosas en voz alta ayuda a recordarlas. Colin MacLeod y su equipo llamaron a esto "efecto de producción" (2010): las palabras leídas en voz alta se recordaban mejor que las leídas en silencio. Kevin no solo usaba tarjetas: además decía la respuesta en voz alta.',
+tip:'Cierra cada charla con una ronda de 30 segundos: dos o tres personas dicen en voz alta la idea principal. Recuperación + producción en un solo movimiento.',
+gancho:'Kevin tenía un segundo secreto en la cajita de zapatos: los compartimientos.',
+check:{p:'¿Por qué releer da una falsa sensación de dominio?', r:'Por la ilusión de fluidez: el material se siente familiar, pero reconocer no es lo mismo que poder recuperarlo de memoria.'}},
+{t:'Repaso espaciado', h:`
+<p>Diez repasos en una noche rinden menos que cuatro repasos distribuidos en un mes. Espaciar obliga al cerebro a "rescatar" el recuerdo justo cuando empieza a olvidarlo, y eso lo fortalece.</p>
+<div class="callout cyan"><b>Regla práctica:</b> repasa al día siguiente, a los 3 días, a la semana y al mes.</div>
+<p>La sección <b>Repasar</b> de esta app funciona como la cajita de Kevin: 5 cajas. Si aciertas, la tarjeta sube de caja y vuelve más tarde. Si fallas, regresa a la caja 1.</p>
+<div class="callout amber"><b>⛑️ En campo:</b> en lugar de una charla de 30 minutos sobre línea de fuego, da 4 charlas de 5 minutos en el mes que retomen la misma idea con casos distintos.</div>`,
+dato:'El sistema de la cajita lo inventó en 1972 un periodista alemán, Sebastian Leitner, en un libro de autoayuda llamado algo así como "Así se aprende a aprender". No era científico. Décadas después, los experimentos confirmaron que su intuición era correcta, y hoy la usan aplicaciones de idiomas con millones de usuarios.',
+tip:'Usa tu programa mensual de charlas como un sistema Leitner: el tema crítico del mes aparece en la semana 1, se retoma con una pregunta en la semana 2 y con un caso nuevo en la semana 4.',
+gancho:'Hasta aquí, todo suena razonable. Lo siguiente va contra la intuición: a veces conviene que aprender cueste más.',
+check:{p:'¿Qué rinde más: 10 repasos en una noche o 4 repasos distribuidos en un mes?', r:'Los 4 repasos distribuidos. El espaciado obliga a recuperar justo cuando se empieza a olvidar.'}},
+{t:'Intercalar y elaborar', h:`
+<p><b>Intercalar:</b> mezclar tipos de problemas en la práctica (eslingas, grilletes, ganchos) en vez de practicar todo de un tipo y luego todo del otro. Cuesta más en el momento, pero enseña a <b>distinguir cuándo aplicar qué</b>.</p>
+<p><b>Elaborar:</b> preguntarte "¿por qué?" y "¿cómo se conecta con lo que ya sé?". Cada conexión es un gancho más para recuperar el recuerdo.</p>
+<div class="callout amber"><b>Dificultades deseables</b> (término de Robert Bjork): lo que cuesta un poco más al aprender (recuperar, espaciar, intercalar) suele durar más. Lo que se siente fácil se olvida rápido.</div>`,
+dato:'Taylor y Rohrer (2010) entrenaron a niños en problemas de matemáticas. Un grupo practicó por bloques (todos los de un tipo, luego los del otro); otro grupo, mezclados. Durante la práctica, el grupo por bloques parecía ir mejor. En el examen del día siguiente, el grupo intercalado sacó más del doble de aciertos.',
+tip:'En la práctica de inspección, mezcla en la mesa accesorios buenos y dañados de distintos tipos. Que el trabajador tenga que decidir "¿esto pasa o no pasa?" en cada uno.',
+gancho:'Kevin también dibujaba en sus tarjetas. Monigotes, flechas, una célula con cara. Rosa pensó que era distracción. Se equivocaba.',
+check:{p:'¿Qué es una "dificultad deseable"?', r:'Un esfuerzo extra al aprender (recuperar, espaciar, intercalar) que hace el proceso más lento en el momento, pero el recuerdo más duradero.'}},
+{t:'Palabra + imagen', h:`
+<p>El cerebro procesa palabras e imágenes por canales en parte distintos. Cuando combinas ambos, creas <b>dos rutas</b> hacia el mismo recuerdo (codificación dual, Allan Paivio).</p>
+<ul>
+<li>Muestra el objeto real o una foto mientras lo explicas.</li>
+<li>Dibuja un esquema simple en la pizarra.</li>
+<li>Usa <b>ejemplos concretos</b> antes de la regla abstracta.</li>
+</ul>
+<div class="callout cyan">Esto sirve a <b>todas</b> las personas. No tiene relación con los "estilos de aprendizaje" (verás por qué en el módulo de mitos).</div>`,
+dato:'En 1973, Lionel Standing mostró 10 000 fotografías a voluntarios, una tras otra, durante varios días. Después les presentó pares de fotos: una vista y una nueva. Reconocieron la correcta en más del 80% de los casos. Con palabras sueltas, el rendimiento fue claramente menor. Los psicólogos lo llaman "efecto de superioridad de la imagen".',
+tip:'Toma fotos de condiciones reales de tu propia área (con permiso) y úsalas en las charlas. Una foto del muelle que conocen vale más que diez imágenes de internet.',
+gancho:'Falta un ingrediente, el más delicado. Rosa lo descubrió el día que se equivocó delante de todos.',
+check:{p:'¿Por qué conviene combinar palabras e imágenes?', r:'Porque se crean dos rutas de memoria (verbal y visual) hacia la misma idea, y eso facilita recuperarla.'}},
+{t:'Emoción, error y seguridad psicológica', h:`
+<p>La <b>emoción moderada</b> ayuda: la amígdala avisa al hipocampo "esto importa, guárdalo". Por eso recuerdas dónde estabas en momentos fuertes.</p>
+<p>El <b>miedo intenso</b> bloquea: la persona aterrada se enfoca en protegerse y deja de razonar.</p>
+<p>El <b>error</b> es información valiosa para el cerebro (pilar 3). Pero si equivocarse trae burla o castigo, la gente oculta sus dudas y sus errores.</p>
+<div class="callout amber"><b>⛑️ En campo:</b> agradece la pregunta "tonta" en público. Cada duda que alguien se calla en la charla es un riesgo que se va al frente de trabajo.</div>`,
+dato:'Butterfield y Metcalfe (2001) descubrieron el "efecto de hipercorrección": los errores cometidos con mucha seguridad se corrigen mejor que los cometidos con duda, siempre que la persona reciba la respuesta correcta. La sorpresa de "¡estaba seguro y me equivoqué!" graba la corrección con fuerza.',
+tip:'Usa preguntas trampa en tus charlas, donde la respuesta "obvia" está mal ("¿una eslinga con un hilo roto todavía sirve?"). Cuando el veterano falla con seguridad y escucha la explicación, ya no la olvida. Hazlo con humor, nunca con burla.',
+gancho:'Con los pilares claros, Rosa se sintió lista. Hasta que asistió a la capacitación de un consultor que llegó de Lima con una presentación impecable y tres mentiras.',
+check:{p:'¿Por qué es peligroso que el personal tenga miedo de preguntar en una capacitación?', r:'Porque oculta sus dudas y errores; el error no corregido se convierte en una conducta insegura en campo.'}}
+],
+claves:['Atención, compromiso activo, retroalimentación del error y consolidación.','Recuperar fortalece más que releer; en voz alta, mejor.','Espaciar los repasos vence a la curva del olvido.','Intercalar y elaborar crean recuerdos flexibles.','Palabra + imagen = dos rutas de memoria.','Emoción moderada ayuda; miedo y burla bloquean.'],
+quiz:[
+{t:'mc',d:true,p:'¿Qué técnica de estudio tiene más respaldo científico para recordar a largo plazo?',o:['Releer y subrayar','Práctica de recuperación espaciada','Escuchar música mientras estudias','Estudiar toda la noche anterior'],c:1,e:'Recuperar de memoria y espaciar los repasos son de las técnicas más sólidas.'},
+{t:'mc',d:true,p:'¿Cuál NO es uno de los 4 pilares del aprendizaje de Dehaene?',o:['Atención','Compromiso activo','Estilo de aprendizaje preferido','Consolidación'],c:2,e:'Los pilares son atención, compromiso activo, retroalimentación del error y consolidación.'},
+{t:'vf',p:'Quienes releen un texto suelen sentirse más seguros de lo que realmente recuerdan.',c:true,e:'Es la ilusión de fluidez: familiar no significa recuperable.'},
+{t:'mc',p:'Quieres que tu equipo recuerde "línea de fuego" todo el año. ¿Qué plan es mejor?',o:['Una charla larga de 1 hora en enero','4 charlas cortas espaciadas con casos distintos','Un afiche en el comedor','Enviar el procedimiento por correo'],c:1,e:'Espaciado + variedad de casos + recuperación.'},
+{t:'mc',p:'Practicar mezclando eslingas, grilletes y ganchos en vez de un tema por bloque se llama:',o:['Intercalado','Chunking','Multitarea','Memoria sensorial'],c:0,e:'El intercalado enseña a distinguir qué aplicar en cada caso.'},
+{t:'vf',p:'Combinar palabra e imagen solo beneficia a las personas "visuales".',c:false,e:'La codificación dual beneficia a todos.'},
+{t:'mc',p:'El efecto de hipercorrección dice que:',o:['Los errores cometidos con mucha seguridad se corrigen mejor al recibir la respuesta correcta','Corregir errores daña la autoestima','Nunca se debe mostrar el error','Los errores con duda se graban más'],c:0,e:'La sorpresa de equivocarse estando seguro refuerza la corrección.'},
+{t:'mc',p:'Un trabajador se equivoca al responder en la charla. La mejor reacción es:',o:['Corregirlo con burla para que no lo olvide','Ignorar el error','Agradecer, explicar el porqué de la respuesta correcta y seguir','Pedirle que no hable más'],c:2,e:'Retroalimentación del error en un ambiente seguro: así se corrige el modelo mental.'},
+{t:'vf',p:'Leer o decir la información en voz alta ayuda a recordarla mejor que leerla en silencio.',c:true,e:'Es el efecto de producción (MacLeod, 2010).'}
+],
+cartas:[
+{f:'4 pilares de Dehaene',b:'Atención, compromiso activo, retroalimentación del error y consolidación.'},
+{f:'Efecto de prueba',b:'Recuperar información de memoria la fortalece más que releerla.'},
+{f:'Ilusión de fluidez',b:'Sentir que sabes algo porque te resulta familiar, aunque no puedas recordarlo solo.'},
+{f:'Calendario de repaso práctico',b:'Al día siguiente, a los 3 días, a la semana y al mes.'},
+{f:'Dificultades deseables (Bjork)',b:'Esfuerzos que hacen más lento el aprendizaje en el momento pero más duradero: recuperar, espaciar, intercalar.'},
+{f:'Efecto de superioridad de la imagen',b:'Las imágenes se reconocen mucho mejor que las palabras (Standing: 10 000 fotos, más del 80% reconocidas).'},
+{f:'Efecto de hipercorrección',b:'Un error cometido con mucha seguridad, una vez corregido, se recuerda con fuerza.'}
+]
+},
+
+/* ================= MÓDULO 4 ================= */
+{
+id:'m4', icono:'🚫', titulo:'Mitos que debes dejar de repetir', sub:'Ideas populares sin respaldo y qué hacer en su lugar', min:12,
+relato:{t:'Capítulo 4 · El consultor de Lima', h:`
+<p class="drop">El consultor llegó en la avioneta del jueves con camisa celeste planchada, una laptop plateada y la seguridad de quien ha dado la misma presentación doscientas veces. Se llamaba Renzo. Cobraba por hora una cifra que Rosa prefirió no calcular.</p>
+<p>A los tres minutos proyectó una pirámide de colores. «Recordamos el 10% de lo que leemos y el 90% de lo que hacemos», dijo, y los veinte supervisores asintieron como quien escucha el Padre Nuestro.</p>
+<p>A los ocho minutos explicó que «solo el 7% de la comunicación son palabras». A los doce, que «solo usamos el 10% del cerebro». A los quince, que había que identificar si cada trabajador era visual, auditivo o kinestésico.</p>
+<p>Un mes antes, Rosa habría tomado nota de todo. Esta vez sintió algo raro en el estómago, una mezcla de vergüenza ajena y placer culpable. Porque acababa de leer de dónde salía cada una de esas frases. Y ninguna salía de donde Renzo creía.</p>
+<p>No dijo nada. Esperó el break, se sirvió una galleta de soda, y se acercó al consultor con la sonrisa más amable que tenía.</p>
+<p class="dlg">«Renzo, una consulta. Lo de la pirámide, ¿de qué estudio sale?»</p>
+<p>Renzo masticó despacio. Muy despacio.</p>`},
+secciones:[
+{t:'Mito: "Cada uno tiene su estilo de aprendizaje"', h:`
+<p class="myth">❌ "Hay personas visuales, auditivas y kinestésicas, y aprenden mejor si les enseñas en su estilo."</p>
+<p><b>Lo que dice la evidencia:</b> las personas sí tienen preferencias, pero enseñar según esa preferencia <b>no mejora</b> lo que aprenden (revisión de Pashler y colegas, 2008, y estudios posteriores).</p>
+<div class="callout cyan"><b>Haz esto:</b> elige el formato según el <b>contenido</b>. Una maniobra se enseña mostrando y practicando; un plano, con imagen; una norma, con palabras y ejemplo. Combina canales para todos.</div>`,
+dato:'En encuestas a docentes de distintos países, cerca de 9 de cada 10 dicen creer que enseñar según el estilo de aprendizaje mejora los resultados (Newton y Salvi, 2020). Es probablemente el neuromito más extendido del mundo educativo, y también entre capacitadores de empresa.',
+tip:'Cuando alguien te diga "es que yo soy visual", respóndele con lo que sí sirve: "perfecto, todos aprendemos mejor con imagen y palabra juntas".',
+gancho:'Renzo, acorralado, cambió de tema hacia la pirámide. Mala idea.',
+check:{p:'¿Qué decide el mejor formato para enseñar algo: el estilo del alumno o el tipo de contenido?', r:'El tipo de contenido. Enseñar según el "estilo" preferido no mejora el aprendizaje.'}},
+{t:'Mito: "La pirámide del aprendizaje"', h:`
+<p class="myth">❌ "Recordamos 10% de lo que leemos, 20% de lo que oímos... y 90% de lo que hacemos."</p>
+<p><b>Lo que dice la evidencia:</b> esos porcentajes <b>no salen de ningún estudio</b>. Los números redondos, que crecen de 10 en 10 sin un solo decimal, delatan el invento. Se atribuye por error al "cono de la experiencia" de Edgar Dale (1946), que no tenía ni un porcentaje.</p>
+<div class="callout cyan"><b>Haz esto:</b> no cites esos números. La idea útil detrás es cierta en parte: el compromiso activo ayuda. Dilo así, sin cifras inventadas.</div>`,
+dato:'Investigadores que rastrearon el origen de la pirámide encontraron versiones con porcentajes distintos en distintas fuentes, y ninguna con un estudio detrás. Una señal de alerta universal: cuando una cifra sobre el cerebro es demasiado redonda y demasiado perfecta, sospecha.',
+tip:'Antes de usar un dato en una capacitación, hazte una pregunta: "¿quién lo midió, cuándo y con cuántas personas?". Si no puedes responder, no lo uses.',
+gancho:'El siguiente mito tiene película de Hollywood y todo.',
+check:{p:'¿De dónde salen los porcentajes de la "pirámide del aprendizaje"?', r:'De ningún estudio. Son cifras inventadas y mal atribuidas al cono de Edgar Dale.'}},
+{t:'Mito: "Solo usamos el 10% del cerebro"', h:`
+<p class="myth">❌ "Si activaras el 90% restante, serías un genio."</p>
+<p><b>Lo que dice la evidencia:</b> las neuroimágenes muestran actividad en prácticamente todo el cerebro a lo largo del día. Una lesión pequeña en casi cualquier zona produce algún déficit. Y un órgano que gasta el 20% de tu energía no podría darse el lujo de tener un 90% de vacaciones.</p>`,
+dato:'El mito inspiró la película "Lucy" (2014), donde Scarlett Johansson desbloquea el 100% de su cerebro y adquiere superpoderes. Otro mito pariente: el "efecto Mozart". Un estudio de 1993 encontró una mejora pequeña y pasajera en una tarea espacial tras escuchar Mozart. Bastó para que en 1998 el gobernador del estado de Georgia, en EE. UU., propusiera regalar discos de música clásica a cada recién nacido. Los estudios posteriores no encontraron que Mozart vuelva más inteligente a nadie.',
+tip:'Si alguien en tu equipo cita uno de estos mitos, no lo humilles en público. Pregúntale con curiosidad de dónde lo sacó. Aplica la seguridad psicológica que aprendiste.',
+gancho:'El cuarto mito divide a la gente en dos bandos. Rosa siempre se creyó del bando "creativo".',
+check:{p:'Da una razón por la que el mito del 10% es falso.', r:'Las neuroimágenes muestran actividad en casi todo el cerebro, y lesiones en casi cualquier zona causan déficits.'}},
+{t:'Mito: "Cerebro izquierdo y cerebro derecho"', h:`
+<p class="myth">❌ "Las personas lógicas usan el hemisferio izquierdo y las creativas el derecho."</p>
+<p><b>Lo que dice la evidencia:</b> algunas funciones se apoyan más en un lado (el lenguaje, en la mayoría, a la izquierda), pero un estudio con más de 1000 cerebros (Nielsen y colegas, 2013) no encontró personas "de hemisferio izquierdo" ni "de hemisferio derecho". Ambos lados trabajan juntos todo el tiempo.</p>`,
+dato:'La idea viene de un descubrimiento real que ganó el Nobel en 1981: Roger Sperry estudió pacientes a quienes se les había cortado el puente entre hemisferios para tratar epilepsia grave. En ellos, cada mitad funcionaba por separado con habilidades distintas. La cultura popular tomó ese hallazgo en pacientes muy especiales y lo convirtió en un test de personalidad para todos.',
+tip:'Desconfía de cualquier test que te clasifique en un "tipo de cerebro". El cerebro funciona en red, y las etiquetas limitan más de lo que ayudan.',
+gancho:'El quinto mito es el favorito de los cursos de oratoria. Y fue el que hizo que Renzo dejara de masticar.',
+check:{p:'¿Existen personas "de hemisferio derecho" o "de hemisferio izquierdo"?', r:'No. Hay funciones lateralizadas, pero las personas usan ambos hemisferios en conjunto.'}},
+{t:'Mito: "El 93% de la comunicación es no verbal"', h:`
+<p class="myth">❌ "Solo el 7% del mensaje son palabras, 38% el tono y 55% el cuerpo."</p>
+<p><b>Lo que dice la evidencia:</b> Albert Mehrabian estudió en los años 60 un caso muy específico: cómo juzgamos <b>sentimientos</b> cuando las palabras <b>contradicen</b> el tono o la expresión. Usó palabras sueltas, grabadas, y fotos. Él mismo aclara que esas cifras no se aplican a la comunicación en general.</p>
+<div class="callout cyan"><b>Lo útil que sí queda:</b> cuando tus palabras dicen una cosa y tu cuerpo otra, el público cree al cuerpo. Busca coherencia. Y en una charla técnica, las palabras importan muchísimo.</div>`,
+dato:'Haz la prueba que propone la lógica: si solo el 7% fuera palabras, podrías ver una película en un idioma que no conoces y entender el 93% de la trama. Nadie lo logra. Mehrabian pasó años aclarando en entrevistas y en su propia página web que su fórmula se usa mal.',
+tip:'Usa el hallazgo real a tu favor: si vas a decir "esto es grave", que tu cara, tu ritmo y tu pausa también lo digan. La incoherencia hace que el mensaje pierda fuerza.',
+gancho:'El sexto mito habla de peces dorados. Spoiler: el pez sale mejor parado que el mito.',
+check:{p:'¿A qué situación se aplica realmente la regla 7-38-55 de Mehrabian?', r:'A juzgar sentimientos o actitudes cuando las palabras contradicen el tono o el lenguaje corporal. No a toda comunicación.'}},
+{t:'Mito: "La atención dura 8 segundos" o "exactamente 10 minutos"', h:`
+<p class="myth">❌ "Tenemos menos atención que un pez dorado." / "A los 10 minutos todos se desconectan."</p>
+<p><b>Lo que dice la evidencia:</b> la cifra del pez dorado salió de un informe de marketing de 2015 sin estudio que la respalde. La "regla de los 10 minutos" tampoco tiene un respaldo sólido: la atención <b>fluctúa</b> según el interés, la fatiga, el ambiente y lo que hace el expositor.</p>
+<div class="callout cyan"><b>Haz esto:</b> en vez de temer al reloj, cambia de actividad con frecuencia (pregunta, muestra un objeto, pide una demostración). Cada cambio reinicia la atención.</div>`,
+dato:'Los peces dorados recuerdan bastante más que 3 segundos. En experimentos, se les entrenó a acudir a un sonido o a empujar una palanca para recibir comida, y conservaban lo aprendido durante semanas o meses. El pez dorado fue difamado dos veces: por su memoria y por su atención.',
+tip:'Planifica tu charla en bloques de pocos minutos con un "reinicio" entre ellos: una pregunta, un objeto, un cambio de voz o de lugar.',
+gancho:'El séptimo mito lo practican todos en la charla, celular en mano.',
+check:{p:'¿Qué hace realmente la atención durante una charla?', r:'Fluctúa según el interés, la fatiga, el ambiente y la conducción del expositor. No tiene un límite fijo universal.'}},
+{t:'Mito: "Soy bueno en multitarea"', h:`
+<p class="myth">❌ "Puedo atender la charla y responder WhatsApp a la vez."</p>
+<p><b>Lo que dice la evidencia:</b> para tareas que exigen atención, el cerebro <b>alterna</b> rápido entre una y otra. Cada cambio cuesta tiempo y produce errores. Quien revisa el celular en la charla se pierde partes que cree haber escuchado.</p>`,
+dato:'Un estudio de Stanford (Ophir, Nass y Wagner, 2009) comparó a personas que hacían mucha multitarea con medios digitales contra las que hacían poca. Los "multitarea intensos" rindieron peor filtrando distracciones y cambiando de tarea, justo lo que creían hacer mejor.',
+tip:'Pide los celulares en modo silencio y boca abajo al inicio, explicando el porqué en una frase. Funciona mejor que prohibirlos sin razón.',
+gancho:'Y el último mito es el más peligroso de todos, porque se disfraza de cumplimiento.',
+check:{p:'¿Qué hace el cerebro cuando "hace multitarea" con dos tareas que exigen atención?', r:'Alterna rápidamente entre ellas, con costo de tiempo y más errores.'}},
+{t:'Mito: "Si firmó la lista, ya está capacitado"', h:`
+<p class="myth">❌ "Tengo 25 firmas, la capacitación se cumplió."</p>
+<p><b>Lo que dice la evidencia:</b> la firma prueba <b>asistencia</b>. No prueba atención, comprensión, recuerdo ni cambio de conducta. Rosa tenía veintiocho firmas y un Teodoro que hablaba de cascos.</p>
+<div class="callout amber"><b>Haz esto:</b> agrega al menos una verificación real: 3 preguntas orales, una demostración inversa o un quiz corto. En el módulo 7 verás cómo medir con el modelo de Kirkpatrick.</div>`,
+dato:'Renzo, el consultor, terminó su taller pidiendo que todos firmaran la lista y llenaran una encuesta de satisfacción. Puntaje promedio: 4.8 de 5. Una semana después, Rosa preguntó a cinco asistentes qué recordaban. Cuatro recordaron la pirámide del 10% al 90%. El único dato que recordaron era falso. La satisfacción no mide el aprendizaje.',
+tip:'Agrega a tu registro de capacitación una columna simple: "verificación" (qué hiciste para comprobar que entendieron). Con el tiempo, ese dato vale más que las firmas.',
+gancho:'Después del taller, Rosa cambió de lugar: dejó de mirar la charla desde el frente y se sentó, por primera vez en años, en la última fila.',
+check:{p:'¿Qué prueba una lista de asistencia firmada?', r:'Solo asistencia. No prueba comprensión, recuerdo ni cambio de conducta.'}}
+],
+claves:['Estilos de aprendizaje: preferencia sí, beneficio no.','La pirámide del 10%–90% es inventada.','Usamos todo el cerebro, con ambos hemisferios.','El 7-38-55 solo aplica a sentimientos con mensajes contradictorios.','La atención fluctúa; reiníciala cambiando de actividad.','La firma prueba asistencia, no aprendizaje.'],
+quiz:[
+{t:'vf',d:true,p:'Enseñar a cada persona según su estilo (visual, auditivo, kinestésico) mejora significativamente su aprendizaje.',c:false,e:'No hay evidencia de ese beneficio. El formato debe ajustarse al contenido.'},
+{t:'vf',d:true,p:'Los porcentajes "10% de lo que lees, 90% de lo que haces" provienen de un estudio científico confiable.',c:false,e:'Son cifras inventadas y mal atribuidas a Edgar Dale.'},
+{t:'mc',p:'La regla 7-38-55 de Mehrabian se aplica a:',o:['Toda comunicación humana','Las charlas técnicas','Juzgar sentimientos cuando palabras y tono se contradicen','Las presentaciones con diapositivas'],c:2,e:'Fue un estudio muy específico; el propio autor rechaza la generalización.'},
+{t:'mc',p:'¿Qué es correcto sobre los hemisferios cerebrales?',o:['Las personas creativas usan solo el derecho','Ambos trabajan juntos; algunas funciones se apoyan más en un lado','El izquierdo no participa en emociones','Se puede entrenar un hemisferio para dominar al otro'],c:1,e:'Hay lateralización de funciones, no "tipos de persona" por hemisferio.'},
+{t:'vf',p:'Usamos solo el 10% de nuestro cerebro.',c:false,e:'Prácticamente todo el cerebro muestra actividad a lo largo del día.'},
+{t:'mc',p:'¿Qué hacer frente a la caída de atención en una charla?',o:['Hablar más rápido para terminar antes','Cambiar de actividad: preguntar, mostrar un objeto, demostrar','Subir el volumen y regañar','Nada, es inevitable a los 10 minutos'],c:1,e:'Los cambios de actividad reinician la atención.'},
+{t:'mc',p:'Un participante responde mensajes durante la capacitación. ¿Qué ocurre?',o:['Atiende ambas cosas sin pérdida','Alterna entre tareas y se pierde partes de la charla','Aprende mejor porque está relajado','Nada importante'],c:1,e:'La multitarea con tareas atencionales es alternancia con costo.'},
+{t:'mc',p:'¿Qué evidencia demuestra mejor que una capacitación funcionó?',o:['La lista de asistencia firmada','Una encuesta de satisfacción con 4.8 de 5','Una verificación de comprensión y la observación posterior de la conducta','La duración en horas'],c:2,e:'Asistir o quedar satisfecho no es aprender. Mide comprensión y conducta.'},
+{t:'vf',p:'Los peces dorados olvidan todo en 3 segundos.',c:false,e:'En experimentos conservan lo aprendido durante semanas o meses.'}
+],
+cartas:[
+{f:'Estilos de aprendizaje (VAK)',b:'Mito. Enseñar según el estilo preferido no mejora el aprendizaje. Ajusta el formato al contenido.'},
+{f:'Pirámide del aprendizaje',b:'Mito. Los porcentajes 10%-90% no salen de ningún estudio.'},
+{f:'Regla 7-38-55',b:'Solo aplica a juzgar sentimientos cuando palabras y tono se contradicen.'},
+{f:'¿Atención de 8 segundos?',b:'Mito de un informe de marketing. La atención fluctúa; se reinicia cambiando de actividad.'},
+{f:'Multitarea',b:'Con tareas que exigen atención, el cerebro alterna, con costo de tiempo y errores.'},
+{f:'Lista de asistencia',b:'Prueba asistencia, no aprendizaje ni cambio de conducta.'},
+{f:'Prueba anti-mito',b:'¿Quién lo midió, cuándo y con cuántas personas? Si no lo sabes, no lo cites.'}
+]
+},
+
+/* ================= MÓDULO 5 ================= */
+{
+id:'m5', icono:'👂', titulo:'El cerebro del que escucha', sub:'Qué pasa dentro de tu público mientras hablas', min:15,
+relato:{t:'Capítulo 5 · La última fila', h:`
+<p class="drop">El lunes, Rosa le pidió a su colega Iván que diera la charla de las seis y media. Ella se sentó en la última banca, junto a los tanques de combustible, con un cuaderno escondido dentro del casco.</p>
+<p>Desde el frente, una charla parece un acto de comunicación. Desde la última fila, parece una sala de espera.</p>
+<p>Anotó todo. Minuto 1: Iván dice «buenos días, hoy vamos a hablar de...». Tres personas bostezan en simultáneo, como si se hubieran puesto de acuerdo. Minuto 2: pasa la chata con el motor a fondo; durante cuarenta segundos Iván mueve la boca y no se oye nada. Iván sigue hablando igual. Minuto 3: Wilder mira el celular. Minuto 4: Iván dice «EPP», «ATS», «PETAR» y «IPERC» en una misma frase. El nuevo, un muchacho de Nauta en su segundo día, frunce el ceño como quien intenta leer en chino.</p>
+<p>Minuto 6: Iván cuenta, casi de pasada, que una vez vio a un ayudante resbalar en la rampa con lluvia. Por primera vez en seis minutos, todas las cabezas giran hacia él al mismo tiempo.</p>
+<p>Duró diez segundos. Luego Iván volvió a leer la lámina.</p>
+<p>Rosa subrayó dos veces esa línea del cuaderno. Algo había pasado en el minuto 6 dentro de veinte cerebros a la vez. Quería saber qué.</p>`},
+secciones:[
+{t:'La atención sube y baja', h:`
+<p>Tu público recuerda mejor <b>lo primero</b> (efecto de primacía) y <b>lo último</b> (efecto de recencia). En el medio, la atención se desgasta.</p>
+<div data-widget="atencion"></div>
+<div class="callout amber"><b>Consecuencias:</b> no desperdicies el inicio con trámites ("firmen la lista", "hoy les voy a hablar de..."). Pon el mensaje clave al principio y repítelo al final.</div>`,
+dato:'En 1999, Simons y Chabris pidieron a voluntarios contar los pases de un equipo de básquet en un video. A mitad del video, una persona disfrazada de gorila cruza la cancha, se golpea el pecho y se va. Cerca de la mitad no vio al gorila. En 2013, Trafton Drew repitió la idea con radiólogos expertos: insertó un gorila diminuto en una tomografía de pulmón. El 83% no lo vio, aunque sus ojos pasaron por encima.',
+tip:'Si tu público está concentrado en otra cosa (el celular, el motor, el calor), no verá tu "gorila". Primero captura su atención con algo directo; después da el mensaje.',
+gancho:'Lo que ocurre en el medio de la charla depende de cuánto peso le pones encima a una mesa que ya conoces.',
+check:{p:'¿Qué partes de una charla se recuerdan mejor y cómo se llaman esos efectos?', r:'El inicio (primacía) y el final (recencia). Ahí debe ir el mensaje clave.'}},
+{t:'Carga cognitiva: no satures la mesa', h:`
+<p>La memoria de trabajo de tu público es limitada. Todo compite por ese espacio. La teoría de carga cognitiva (John Sweller) distingue tres tipos:</p>
+<ul>
+<li><b>Intrínseca:</b> la dificultad propia del tema. No la puedes eliminar, pero puedes dosificarla.</li>
+<li><b>Extraña:</b> lo que estorba: ruido, siglas sin explicar, láminas cargadas, desorden. <b>Elimínala.</b></li>
+<li><b>Útil:</b> el esfuerzo de entender y conectar. Esa es la que quieres.</li>
+</ul>
+<p>En el minuto 4, el muchacho de Nauta gastaba toda su mesa en descifrar siglas. No le quedaba espacio para el mensaje.</p>
+<div class="callout cyan"><b>Pregunta de control:</b> "¿Esto ayuda a que entiendan el mensaje, o solo ocupa espacio?"</div>`,
+dato:'Las pupilas se dilatan cuando la mente trabaja más. En los años 60, Daniel Kahneman (luego premio Nobel de Economía) midió que la pupila se agranda a medida que una persona retiene más dígitos en la memoria y se contrae cuando los suelta. Literalmente puedes ver el esfuerzo mental en los ojos de alguien.',
+tip:'Revisa tu guion y marca cada sigla. Por cada una, decide: o la explicas la primera vez, o la eliminas.',
+gancho:'Ahora, el minuto 6. Lo que pasó cuando Iván contó lo del ayudante en la rampa tiene nombre y apellido.',
+check:{p:'¿Qué tipo de carga cognitiva debes eliminar en una charla?', r:'La carga extraña: ruido, jerga, láminas sobrecargadas, desorden.'}},
+{t:'Historias: los cerebros se sincronizan', h:`
+<p>Cuando alguien cuenta una historia y otro la entiende, la actividad cerebral del que escucha <b>se acopla</b> con la del que habla. Cuanto mayor el acople, mejor la comprensión (Stephens, Silbert y Hasson, 2010).</p>
+<p>Eso pasó en el minuto 6: veinte cerebros se sincronizaron con el de Iván durante diez segundos.</p>
+<div class="callout amber"><b>Estructura de una historia de seguridad:</b><br>1. Persona y lugar concretos. 2. Una situación normal. 3. El giro (qué salió mal). 4. La consecuencia. 5. La lección en una frase.</div>
+<p class="muted small">Sobre las "neuronas espejo": la idea se popularizó mucho, pero su papel en la comprensión humana todavía se debate. No hace falta para explicar por qué funcionan las historias.</p>`,
+dato:'En el experimento de Hasson, una persona contaba una historia en inglés. Los oyentes que la entendían mostraban acople cerebral con ella. Como control, también hicieron escuchar una historia en ruso a quienes no hablaban ruso: el sonido llegaba igual a sus oídos, pero no hubo acople. La sincronía requiere comprensión, no solo sonido.',
+tip:'Lleva siempre una historia de 30 segundos en el bolsillo para cada tema crítico. Si la charla se cae, cuéntala: es tu botón de reinicio.',
+gancho:'Hay una forma de lograr esa sincronía antes de contar nada. Solo necesitas abrir un hueco.',
+check:{p:'¿Cuáles son las 5 partes de una historia de seguridad efectiva?', r:'Persona y lugar concretos, situación normal, giro, consecuencia y lección en una frase.'}},
+{t:'Curiosidad: abre un hueco', h:`
+<p>La curiosidad aparece cuando el cerebro detecta un <b>hueco</b> entre lo que sabe y lo que quiere saber (George Loewenstein, 1994). Ese hueco activa el sistema de dopamina, y lo que aprendes en ese estado se recuerda mejor.</p>
+<div class="callout cyan"><b>Cómo abrir el hueco:</b>
+<ul><li>Empieza con una pregunta real: "¿Cuánto pesa la carga que levantamos ayer?"</li>
+<li>Muestra algo inesperado: un grillete deformado.</li>
+<li>Plantea un dilema: "¿Qué harías si...?"</li></ul>
+Y después <b>cierra el hueco</b> con tu mensaje.</div>`,
+dato:'Gruber, Gelman y Ranganath (2014) hicieron preguntas de trivia y pidieron a los voluntarios calificar cuánta curiosidad les daba cada una. Mientras esperaban la respuesta, les mostraban caras de personas que no tenían nada que ver. Al día siguiente, recordaban mejor las caras que vieron durante las preguntas que les daban más curiosidad. La curiosidad abre una ventana de aprendizaje para todo lo que pasa cerca.',
+tip:'Este material usa la técnica que estás leyendo: cada sección termina con un gancho hacia la siguiente. Copia el truco: termina tu charla de hoy anunciando qué contarás mañana.',
+gancho:'El miedo también abre huecos. Pero es una herramienta con filo por los dos lados.',
+check:{p:'¿Qué produce la curiosidad y cómo la aprovechas al iniciar una charla?', r:'Un hueco entre lo que se sabe y lo que se quiere saber; abre la charla con una pregunta o algo inesperado y luego ciérralo con el mensaje.'}},
+{t:'El miedo: úsalo con cuidado', h:`
+<p>Los mensajes que asustan funcionan <b>solo si</b> vienen con una solución clara y creíble. La investigación sobre apelaciones al miedo (modelo de Kim Witte y metaanálisis de Tannenbaum y colegas, 2015) coincide:</p>
+<ul>
+<li><b>Amenaza + qué hacer + "tú puedes hacerlo"</b> → la persona actúa.</li>
+<li><b>Amenaza sin salida clara</b> → la persona se defiende: niega, minimiza ("a mí no me va a pasar") o evita pensar en el tema.</li>
+</ul>
+<div class="callout amber"><b>⛑️ En campo:</b> una foto impactante sin una conducta concreta para evitarlo genera rechazo. Si muestras la consecuencia, dedica más tiempo a la acción preventiva que al susto.</div>`,
+dato:'La mayoría de personas cree que tiene menos probabilidad que el promedio de sufrir un accidente, enfermarse o divorciarse. Matemáticamente, no todos pueden estar por debajo del promedio. Neil Weinstein lo documentó en 1980 y lo llamó "optimismo irreal". Por eso el "a mí no me va a pasar" es tan común en campo: el cerebro viene de fábrica con ese sesgo.',
+tip:'Contra el optimismo irreal, usa casos cercanos: "esto pasó en un muelle igual a este, a un rigger con tu misma experiencia". La cercanía rompe el "a mí no".',
+gancho:'Y luego está el problema que tenía Iván. Un problema que, cuanto más sabes, peor se pone.',
+check:{p:'¿Qué necesita un mensaje que genera miedo para producir conducta segura?', r:'Una acción clara y la sensación de que la persona es capaz de hacerla (eficacia). Sin eso, genera negación o evitación.'}},
+{t:'La maldición del conocimiento', h:`
+<p>Cuando dominas un tema, <b>olvidas lo que es no saberlo</b>. Usas siglas, saltas pasos "obvios" y hablas rápido. Para ti es claro; para el nuevo es ruido.</p>
+<div class="callout cyan"><b>Antídotos:</b>
+<ul><li>Explica tu charla a alguien que no es del área antes de darla.</li>
+<li>Define cada sigla la primera vez (ATS, PETAR, EPP).</li>
+<li>Pregunta "¿qué parte no quedó clara?" en vez de "¿se entendió?".</li></ul></div>`,
+dato:'En 1990, Elizabeth Newton pidió a unos voluntarios que "tamborilearan" con los dedos canciones famosas, como el "Feliz cumpleaños", para que otros las adivinaran. Los que tamborileaban calcularon que la mitad de los oyentes acertaría. Acertaron 3 de 120. El que tamborilea escucha la melodía en su cabeza; el que oye solo escucha golpes en una mesa. Así suena tu charla llena de siglas para el nuevo.',
+tip:'Haz la prueba del nuevo: antes de una charla, pídele a alguien con menos de un mes en el proyecto que te diga qué entendió de tu mensaje central.',
+gancho:'Y aunque domines todo lo anterior, falta el enemigo más concreto: el lugar donde das la charla.',
+check:{p:'¿Qué es la maldición del conocimiento?', r:'La dificultad del experto para imaginar lo que es no saber, lo que lo lleva a usar jerga y saltarse pasos.'}},
+{t:'El contexto de campo', h:`
+<p>El cerebro del que escucha también sufre el ambiente:</p>
+<ul>
+<li><b>Ruido</b> (motores, generadores, helicóptero): entender exige más esfuerzo y deja menos memoria de trabajo para el contenido.</li>
+<li><b>Calor y fatiga:</b> bajan la atención sostenida.</li>
+<li><b>Protector auditivo puesto:</b> la voz llega atenuada.</li>
+<li><b>Sol de frente:</b> nadie mira tus láminas ni tu cara.</li>
+</ul>
+<div class="callout amber"><b>Ajustes:</b> elige un lugar con sombra y lejos del ruido; ponte tú de frente al sol, no ellos; habla más lento; apóyate en objetos y gestos; repite la idea clave.</div>`,
+dato:'En una fiesta ruidosa no entiendes la conversación de al lado, pero si alguien dice tu nombre, giras la cabeza. Colin Cherry describió en 1953 el "efecto cóctel" y Neville Moray mostró en 1959 que el propio nombre atraviesa el filtro de la atención incluso en un canal que la persona ignoraba. Tu cerebro vigila tu nombre aunque no estés escuchando.',
+tip:'Usa nombres en la charla: "Wilder, imagina que tú estás en la rampa...". El nombre propio atraviesa el ruido y despierta al resto del grupo de paso.',
+gancho:'Rosa cerró el cuaderno con doce páginas de notas y una decisión: su segunda charla iba a ser distinta. La preparó durante cuatro noches. La primera noche, empezó por el final.',
+check:{p:'Menciona dos ajustes para dar una charla en el muelle con ruido de motores.', r:'Buscar un lugar más alejado del ruido, hablar más lento, usar objetos y gestos, pausar cuando pasa el ruido, usar nombres y repetir la idea clave.'}}
+],
+claves:['Primacía y recencia: lo clave al inicio y al final.','Elimina la carga extraña (ruido, jerga, láminas llenas).','Las historias sincronizan cerebros y se recuerdan.','La curiosidad abre un hueco; luego ciérralo.','Miedo sin solución clara produce rechazo; el optimismo irreal es de fábrica.','Cuidado con la maldición del conocimiento.','Usa nombres propios: atraviesan el ruido.'],
+quiz:[
+{t:'mc',d:true,p:'¿Dónde conviene colocar el mensaje más importante de una charla?',o:['Solo en el medio','Al inicio y repetirlo al final','Al final, como sorpresa','En la lámina de anexos'],c:1,e:'Primacía y recencia: inicio y final son los momentos de mayor recuerdo.'},
+{t:'mc',d:true,p:'Una lámina con 12 líneas de texto, siglas sin explicar y ruido de fondo aumentan la carga:',o:['Intrínseca','Útil','Extraña','Emocional'],c:2,e:'Todo eso estorba sin ayudar a entender: es carga extraña.'},
+{t:'vf',p:'Muestras fotos impactantes de un accidente sin explicar qué conducta lo previene. Esto garantiza que el personal trabaje más seguro.',c:false,e:'Miedo sin solución clara suele generar negación o evitación.'},
+{t:'mc',p:'¿Qué demostró el experimento del gorila invisible?',o:['Que la gente ve todo lo que tiene delante','Que cuando la atención está ocupada en una tarea, podemos no ver algo evidente','Que los gorilas distraen','Que solo los expertos ven bien'],c:1,e:'Ceguera por falta de atención: incluso el 83% de radiólogos no vio el gorila en la tomografía.'},
+{t:'mc',p:'Un experto explica usando siglas y saltando pasos "obvios". Es un caso de:',o:['Efecto de primacía','Maldición del conocimiento','Codificación dual','Chunking'],c:1,e:'El experto olvida lo que es no saber (como los que tamborileaban canciones).'},
+{t:'orden',p:'Ordena la estructura de una historia de seguridad:',items:['Persona y lugar concretos','Situación normal','El giro','La consecuencia','La lección en una frase'],e:'Contexto concreto, tensión, consecuencia y una lección clara.'},
+{t:'mc',p:'Estás en el muelle y pasa una embarcación con motor ruidoso. ¿Qué haces?',o:['Hablas más fuerte sin parar','Haces una pausa, esperas y retomas repitiendo la idea clave','Terminas la charla','Pides que lean el folleto'],c:1,e:'El ruido roba memoria de trabajo; pausa y repite.'},
+{t:'mc',p:'¿Por qué usar el nombre de un participante ayuda en un ambiente ruidoso?',o:['Porque lo avergüenza','Porque el propio nombre atraviesa el filtro de la atención (efecto cóctel)','Porque es obligatorio','No ayuda'],c:1,e:'El cerebro vigila el propio nombre aun cuando no presta atención.'},
+{t:'mc',p:'"A mí no me va a pasar" es una expresión del sesgo:',o:['De optimismo irreal','De primacía','De superioridad de la imagen','De producción'],c:0,e:'La mayoría se cree por debajo del promedio de riesgo (Weinstein, 1980).'}
+],
+cartas:[
+{f:'Primacía y recencia',b:'Se recuerda mejor lo primero y lo último. El mensaje clave va al inicio y al final.'},
+{f:'Carga cognitiva extraña',b:'Lo que estorba sin ayudar: ruido, jerga, láminas cargadas. Elimínala.'},
+{f:'Acoplamiento neural (Hasson)',b:'Al entender una historia, el cerebro del oyente se sincroniza con el del que habla. Sin comprensión, no hay acople.'},
+{f:'Hueco de curiosidad',b:'Diferencia entre lo que se sabe y lo que se quiere saber; activa la dopamina y mejora el recuerdo.'},
+{f:'Miedo efectivo',b:'Amenaza + acción clara + "tú puedes hacerlo". Sin acción, produce negación.'},
+{f:'Maldición del conocimiento',b:'El experto olvida lo que es no saber. Experimento de Newton: 3 de 120 adivinaron la canción.'},
+{f:'Efecto cóctel',b:'El propio nombre atraviesa el ruido y el filtro de la atención. Usa nombres en tus charlas.'}
+]
+},
+
+/* ================= MÓDULO 6 ================= */
+{
+id:'m6', icono:'🎤', titulo:'Cómo comunicar para que se recuerde', sub:'Estructura, lenguaje, voz, apoyos, interacción y técnicas de novelista', min:18,
+relato:{t:'Capítulo 6 · Cuatro noches en el contenedor', h:`
+<p class="drop">La primera noche, Rosa escribió en la parte de arriba de una hoja en blanco una sola pregunta y se quedó mirándola hasta que el generador se apagó a las once: ¿qué quiero que hagan distinto mañana?</p>
+<p>No «hablar de izaje». No «concientizar». Algo que se pudiera ver con los ojos. A las once y diez, con la linterna del celular, escribió: <i>que nadie se pare debajo de una carga suspendida</i>. Nueve palabras. Las contó dos veces.</p>
+<p>La segunda noche armó la estructura y tachó diecisiete láminas de diecinueve. La tercera noche ensayó en voz alta frente al espejo del contenedor, y descubrió con horror que decía «este» cada cuatro palabras y que, cuando se ponía nerviosa, hablaba como locutora de radio de feria.</p>
+<p>La cuarta noche no pudo dormir. Le sudaban las manos. Pensó en llamar a Iván y pedirle que la reemplazara. Entonces se acordó de algo que había leído sobre los nervios, una idea tan simple que parecía una tomadura de pelo, y la probó.</p>
+<p>Funcionó lo suficiente como para dormir cuatro horas.</p>
+<p>Antes de apagar la linterna, agregó una última línea al guion, copiada de una técnica que usan los novelistas para que no sueltes el libro. Si salía bien, Teodoro iba a recordar esa charla tanto como el grillete de 2009.</p>`},
+secciones:[
+{t:'Empieza por el final', h:`
+<p>Antes de preparar cualquier charla, responde una pregunta:</p>
+<div class="bigq">"¿Qué quiero que hagan <u>distinto</u> mañana?"</div>
+<p>La respuesta debe ser <b>una conducta observable</b>, no un tema. "Hablar de izaje" es un tema. "Que nadie se pare bajo la carga suspendida" es una conducta.</p>
+<div class="callout amber"><b>Prueba del ascensor:</b> escribe tu mensaje central en una frase de menos de 15 palabras. Si no puedes, todavía no sabes qué quieres decir.</div>`,
+dato:'En 1863, en Gettysburg, el orador principal del acto fue Edward Everett, famoso por su elocuencia. Habló cerca de dos horas. Después, Abraham Lincoln habló unos dos minutos: alrededor de 270 palabras. El discurso de Lincoln se estudia hasta hoy en los colegios; el de Everett casi nadie lo recuerda. Al día siguiente, el propio Everett le escribió a Lincoln diciéndole que ojalá él se hubiera acercado tanto a la idea central en dos horas como Lincoln en dos minutos.',
+tip:'Escribe tu mensaje central en un papelito y guárdalo en el bolsillo de la camisa. Si te pierdes durante la charla, vuelve a esa frase.',
+gancho:'Con el mensaje claro, falta el esqueleto. Y el cerebro tiene uno favorito.',
+check:{p:'¿Cuál es la diferencia entre un tema y un mensaje central?', r:'El tema es de qué hablas ("izaje"); el mensaje central es la conducta concreta que quieres lograr ("nadie bajo la carga suspendida").'}},
+{t:'Una estructura que el cerebro sigue', h:`
+<ol class="steps">
+<li><b>Gancho</b>: pregunta, dato local o algo inesperado. Abre el hueco de curiosidad.</li>
+<li><b>Mensaje central</b>: la conducta, en una frase.</li>
+<li><b>Máximo 3 puntos</b>: por qué importa, cómo se hace, qué pasa si no.</li>
+<li><b>Prueba</b>: una historia, un objeto o una demostración.</li>
+<li><b>Verificación</b>: que alguien lo explique o lo muestre.</li>
+<li><b>Acción y cierre</b>: qué harán hoy, y repites el mensaje central.</li>
+</ol>
+<div class="callout cyan">La regla de 3 respeta la memoria de trabajo: tres ideas se recuerdan; siete se mezclan.</div>`,
+dato:'Daniel Kahneman y Donald Redelmeier (1996) estudiaron a pacientes durante un examen médico incómodo. El recuerdo que tenían después dependía casi solo de dos momentos: el peor y el final. La duración total casi no importaba. Lo llamaron "regla del pico y el final". Tu público recordará tu charla por su momento más intenso y por cómo terminó.',
+tip:'Diseña a propósito el "pico" de tu charla (la historia, el objeto, la demostración) y cuida el cierre como si fuera lo único que van a recordar. Probablemente lo sea.',
+gancho:'El esqueleto ya está. Ahora, las palabras con que lo vistes.',
+check:{p:'¿Cuáles son las 6 partes de la estructura recomendada?', r:'Gancho, mensaje central, máximo 3 puntos, prueba, verificación, acción y cierre.'}},
+{t:'Lenguaje que se entiende', h:`
+<ul>
+<li><b>Concreto:</b> "el grillete de 3/4 del muelle 1" se entiende mejor que "los accesorios de izaje".</li>
+<li><b>Verbos de acción:</b> "revisa", "aléjate", "avisa".</li>
+<li><b>Cifras con contexto:</b> "4 toneladas, el peso de dos camionetas" se entiende mejor que "4000 kg".</li>
+<li><b>Analogías</b> con lo cotidiano.</li>
+<li><b>Frases cortas.</b> Una idea por frase.</li>
+<li><b>Habla a la persona:</b> "tú" y "nosotros", no "el personal deberá".</li>
+</ul>
+<div class="callout amber"><b>Prueba rápida:</b> lee tu guion en voz alta. Donde tengas que tomar aire a mitad de frase, corta.</div>`,
+dato:'El cerebro procesa una palabra concreta ("grillete", "río", "machete") más rápido y la recuerda mejor que una abstracta ("seguridad", "riesgo", "cumplimiento"). Los psicólogos lo llaman "efecto de concreción". Una palabra concreta activa imagen y significado a la vez: codificación dual gratis.',
+tip:'Busca en tu guion las palabras "seguridad", "riesgo" y "concientizar". Reemplaza cada una por algo que se pueda tocar, ver o hacer.',
+gancho:'Las palabras salen por un instrumento que casi nadie afina: tu voz. Y por otro que casi nadie controla: tus manos.',
+check:{p:'Reescribe "4000 kg" para que se entienda mejor.', r:'"4 toneladas, lo que pesan dos camionetas" (cifra con contexto y comparación cotidiana).'}},
+{t:'Tu voz y tu cuerpo', h:`
+<ul>
+<li><b>Volumen:</b> que te escuche bien el de la última fila, sin gritar.</li>
+<li><b>Ritmo:</b> unas 120 a 150 palabras por minuto en conversación. Con ruido o público nuevo, más lento.</li>
+<li><b>Pausas:</b> 2 o 3 segundos después de una idea importante. La pausa da tiempo a codificar y llama la atención.</li>
+<li><b>Mirada:</b> recorre el grupo por sectores; sostén la mirada 2 o 3 segundos por persona.</li>
+<li><b>Postura:</b> pies firmes, manos visibles, sin cruzar brazos. Muévete con intención, no por nervios.</li>
+<li><b>Coherencia:</b> si dices "esto es grave" sonriendo y con prisa, creerán a tu cara.</li>
+</ul>`,
+dato:'Los gestos ayudan al que habla, no solo al que escucha. Susan Goldin-Meadow encontró que las personas ciegas de nacimiento gesticulan al hablar, incluso cuando conversan con otra persona ciega. Y cuando a alguien se le impide gesticular, encuentra las palabras con más dificultad. Mover las manos ayuda a pensar.',
+tip:'Graba con tu celular 1 minuto de tu charla y escúchalo sin video. Cuenta tus muletillas ("este", "o sea", "¿no?"). Solo con notarlas, empiezan a bajar.',
+gancho:'Y si usas láminas, hay cinco reglas que separan una lámina que ayuda de una que estorba.',
+check:{p:'¿Para qué sirve una pausa de 2 o 3 segundos después de una idea clave?', r:'Da tiempo al cerebro del oyente para procesar y codificar, y marca la idea como importante.'}},
+{t:'Apoyos visuales que ayudan', h:`
+<p>Richard Mayer estudió durante décadas cómo combinar palabra e imagen. Sus principios más útiles:</p>
+<ul>
+<li><b>Coherencia:</b> quita todo lo decorativo que no aporta.</li>
+<li><b>Redundancia:</b> no leas el texto de la lámina. Si hablas y el texto dice lo mismo, compiten.</li>
+<li><b>Señalización:</b> señala o resalta lo que importa.</li>
+<li><b>Contigüidad:</b> la etiqueta va pegada a la imagen, no en otro lado.</li>
+<li><b>Segmentación:</b> divide en pasos cortos.</li>
+</ul>
+<div class="callout cyan"><b>Jerarquía práctica en campo:</b> objeto real &gt; demostración &gt; foto &gt; dibujo &gt; texto.</div>`,
+dato:'Harp y Mayer (1998) agregaron a un texto científico datos curiosos e imágenes llamativas que no tenían relación con la explicación central. Los lectores dijeron que el texto era más interesante, pero aprendieron menos. Lo llamaron "detalles seductores". Por eso cada dato insólito de este material está conectado con la idea que enseña: si no se conecta, distrae.',
+tip:'Antes de usar una imagen o un video "impactante", pregúntate: ¿esto ilustra mi mensaje central o solo entretiene? Si solo entretiene, sácalo.',
+gancho:'Las láminas informan. Lo que hace pensar es lo que viene ahora.',
+check:{p:'¿Por qué no conviene leer el texto de la lámina en voz alta?', r:'Por el principio de redundancia: el texto escrito y la voz diciendo lo mismo compiten por la atención y sobrecargan.'}},
+{t:'Interacción que hace pensar', h:`
+<ul>
+<li><b>Preguntas abiertas:</b> "¿Qué podría salir mal aquí?" en vez de "¿Está claro?".</li>
+<li><b>Tiempo de espera:</b> después de preguntar, cuenta mentalmente hasta 5. El silencio incomoda, pero da tiempo para pensar.</li>
+<li><b>Teach-back:</b> "Explícame con tus palabras qué harías si...". Si no puede explicarlo, el problema está en cómo lo enseñaste.</li>
+<li><b>Demostración inversa:</b> que el participante haga la maniobra mientras tú observas.</li>
+<li><b>Ronda de compromiso:</b> cada uno dice una cosa que hará hoy.</li>
+</ul>`,
+dato:'En los años 70, Mary Budd Rowe midió cuánto esperaban los profesores después de hacer una pregunta antes de responderla ellos mismos o pasar a otro alumno: en promedio, alrededor de un segundo. Cuando los entrenó para esperar 3 segundos o más, los alumnos daban respuestas más largas, más razonadas, y participaban los que antes no hablaban.',
+tip:'Después de preguntar, mira tu reloj o cuenta con los dedos detrás de la espalda hasta cinco. Si nadie responde, reformula; no respondas tú.',
+gancho:'Ahora, la técnica que Rosa agregó la última noche. La que usan los novelistas para que no sueltes el libro.',
+check:{p:'¿Qué es el teach-back?', r:'Pedir al participante que explique con sus palabras lo aprendido, para verificar comprensión real.'}},
+{t:'Lo que los novelistas saben (y tú puedes robar)', h:`
+<p>Este material está escrito con técnicas de novela. No por adorno: cada una tiene una razón neurológica, y todas sirven en una charla de 5 minutos.</p>
+<div class="tech"><h4>1. Anuncia el final (García Márquez)</h4>
+<p>Gabriel García Márquez abre <i>Crónica de una muerte anunciada</i> diciendo que van a matar al protagonista. Sabes el final desde la primera línea y aun así no puedes dejar de leer: la curiosidad se muda del <b>qué</b> al <b>cómo</b>. Es el hueco de Loewenstein en estado puro.</p>
+<p class="ej">En tu charla: "Hoy les voy a contar cómo un grillete de 3/4 terminó a quince metros del muelle, y por qué nadie salió herido por diez centímetros."</p></div>
+<div class="tech"><h4>2. El detalle exacto (García Márquez)</h4>
+<p>García Márquez cuenta lo increíble con precisión de notario: fechas, horas, cifras, olores. El detalle concreto hace creíble lo extraordinario, y el cerebro guarda mejor lo concreto que lo abstracto.</p>
+<p class="ej">En vez de "hubo un incidente con una carga", di: "a las diez y doce, una tubería de seis metros giró sola y rozó el pasamanos".</p></div>
+<div class="tech"><h4>3. La confesión (Jaime Bayly)</h4>
+<p>Jaime Bayly escribe en primera persona y confiesa sus debilidades, sus vergüenzas y sus errores sin filtro y con humor. El lector siente que le cuentan un secreto y baja la guardia. Mostrar vulnerabilidad genera confianza.</p>
+<p class="ej">En tu charla: "Yo también me paré debajo de una carga una vez. Tenía 24 años y me creía muy vivo. Les cuento qué pasó."</p></div>
+<div class="tech"><h4>4. La ironía que desarma (Bayly)</h4>
+<p>Bayly rompe la solemnidad con ironía. Una sonrisa baja las defensas del público y le da al cerebro una pequeña sorpresa (dopamina). Regla: ríete de la situación o de ti mismo, nunca de un trabajador.</p></div>
+<div class="tech"><h4>5. Capítulos cortos con gancho final</h4>
+<p>Los novelistas de folletín y las series terminan cada capítulo en suspenso. Aplicado a charlas, el gancho final crea una serie: "Mañana les cuento qué encontramos al revisar esa eslinga." Y una serie de charlas sobre el mismo tema es <b>repaso espaciado</b> disfrazado de entretenimiento.</p></div>
+<div class="tech"><h4>6. El ritmo: frase larga, frase corta</h4>
+<p>Una frase larga crea tensión, acumula imágenes y te arrastra. Una corta golpea. Así se marca lo importante sin subir la voz.</p></div>`,
+dato:'García Márquez contó en entrevistas que buscaba la primera frase de una novela durante meses, porque sentía que esa frase definía el tono de todo el libro. Algunos de sus inicios están entre los más citados de la literatura en español. En una charla de 5 minutos, tu primera frase pesa igual: es tu efecto de primacía.',
+tip:'Escribe tres versiones de tu primera frase: una pregunta, una confesión y un final anunciado. Léelas en voz alta y quédate con la que te dé más curiosidad a ti mismo.',
+gancho:'Quedaba un último obstáculo entre Rosa y su segunda charla. El más humano de todos.',
+check:{p:'¿Qué técnica de novelista aplicas si inicias diciendo "hoy les cuento cómo un grillete terminó a 15 metros del muelle"?', r:'Anunciar el final (prolepsis, como García Márquez): la curiosidad pasa del qué al cómo.'}},
+{t:'Los nervios del comunicador', h:`
+<p>Sentir nervios antes de hablar es normal: tu cuerpo libera adrenalina para prepararte. El problema aparece cuando lo interpretas como amenaza.</p>
+<ul>
+<li><b>Reencuadra:</b> di "estoy activado" en lugar de "tengo miedo". En un estudio de Alison Wood Brooks (2014), decirse "estoy emocionado" antes de hablar en público mejoró el desempeño frente a intentar calmarse. Esta fue la idea "tan simple que parecía una tomadura de pelo" que probó Rosa.</li>
+<li><b>Respira con exhalación larga:</b> inhala 4 segundos, exhala 6 a 8. La exhalación lenta ayuda a bajar el ritmo cardiaco.</li>
+<li><b>Memoriza los primeros 30 segundos.</b> El arranque es el momento de más nervios.</li>
+<li><b>Ensaya en voz alta</b>, no solo en la cabeza.</li>
+<li><b>Enfócate en ellos:</b> tu trabajo es que vuelvan sanos a casa. Esa intención baja la autoexigencia.</li>
+</ul>`,
+dato:'Tus nervios se notan mucho menos de lo que crees. Kenneth Savitsky y Thomas Gilovich (2003) lo llamaron "ilusión de transparencia": los oradores sobreestiman cuánto ve el público su ansiedad. Cuando les explicaron esto antes de hablar, se pusieron menos nerviosos y el público calificó mejor sus discursos. Y ojo con otro mito: la frase "la gente le teme más a hablar en público que a la muerte" sale de una encuesta de 1973, popularizada por un libro de 1977, que solo pedía marcar miedos de una lista. No medía la intensidad de nada.',
+tip:'Antes de empezar, repítete en silencio dos frases: "estoy activado" y "se nota menos de lo que siento". Las dos tienen respaldo experimental.',
+gancho:'A las seis y veintiocho de la mañana siguiente, Rosa caminó hacia el muelle con un grillete deformado en el bolsillo de la casaca. Pesaba como una piedra.',
+check:{p:'Menciona dos técnicas para manejar los nervios antes de una charla.', r:'Reencuadrar la activación ("estoy activado"), recordar la ilusión de transparencia, respiración con exhalación larga, memorizar el inicio, ensayar en voz alta, enfocarse en el público.'}}
+],
+claves:['Define la conducta: ¿qué harán distinto mañana?','Gancho, mensaje, 3 puntos, prueba, verificación, acción.','Pico y final: diseña ambos a propósito.','Lenguaje concreto, cifras con contexto, frases cortas.','Pausas, gestos, mirada y coherencia.','No leas la lámina; evita detalles seductores.','Pregunta abierto y espera 5 s.','Técnicas de novelista: final anunciado, detalle exacto, confesión, gancho.','Tus nervios se notan menos de lo que crees.'],
+quiz:[
+{t:'mc',d:true,p:'¿Cuál es el mejor mensaje central para una charla?',o:['"Hoy hablaremos sobre izaje"','"Nadie se para bajo una carga suspendida"','"La seguridad es lo primero"','"Revisaremos el procedimiento PETS-IZ-01 completo"'],c:1,e:'Una conducta concreta y observable en una frase.'},
+{t:'orden',d:true,p:'Ordena la estructura recomendada de una charla:',items:['Gancho','Mensaje central','Máximo 3 puntos','Prueba (historia, objeto o demo)','Verificación','Acción y cierre'],e:'Abre la curiosidad, da el mensaje, desarrolla poco, prueba, verifica y cierra con acción.'},
+{t:'mc',p:'¿Qué expresión es más efectiva?',o:['"La carga pesa 4000 kg"','"La carga pesa 4 toneladas, lo que pesan dos camionetas"','"La carga es pesada"','"La carga supera el 75% de la capacidad nominal del aparejo"'],c:1,e:'Cifra con contexto cotidiano: concreta y memorable.'},
+{t:'vf',p:'Leer en voz alta el texto completo de la lámina ayuda a que el público retenga más.',c:false,e:'Principio de redundancia: voz y texto idéntico compiten.'},
+{t:'mc',p:'Según la regla del pico y el final, el público recordará tu charla sobre todo por:',o:['Su duración total','Su momento más intenso y su cierre','La cantidad de láminas','La puntualidad'],c:1,e:'Kahneman y Redelmeier: el recuerdo depende del pico y del final.'},
+{t:'mc',p:'Empiezas: "Yo también me paré debajo de una carga una vez. Les cuento qué pasó." ¿Qué técnica usas?',o:['Confesión en primera persona','Redundancia','Chunking','Detalle seductor'],c:0,e:'La confesión (al estilo Bayly) genera confianza y baja defensas.'},
+{t:'mc',p:'Después de hacer una pregunta al grupo, conviene:',o:['Responderla tú mismo de inmediato','Esperar unos 5 segundos en silencio','Pasar al siguiente tema','Elegir siempre al supervisor'],c:1,e:'Rowe: con 3 segundos o más, las respuestas mejoran y participan más personas.'},
+{t:'mc',p:'¿Qué técnica verifica mejor que un trabajador entendió cómo inspeccionar una eslinga?',o:['Preguntar "¿Entendiste?"','Que firme la lista','Demostración inversa: que la inspeccione mientras observas','Entregarle el folleto'],c:2,e:'Ver la conducta es la mejor evidencia de aprendizaje procedimental.'},
+{t:'vf',p:'Según la "ilusión de transparencia", los nervios del orador se notan más de lo que él cree.',c:false,e:'Es al revés: se notan menos de lo que el orador cree.'},
+{t:'mc',p:'Los "detalles seductores" (datos curiosos sin relación con el tema) en una capacitación:',o:['Mejoran el aprendizaje siempre','Hacen el material más entretenido pero pueden reducir lo que se aprende','No tienen efecto','Solo funcionan con imágenes'],c:1,e:'Harp y Mayer: más interés, menos aprendizaje si no se conectan con la idea central.'}
+],
+cartas:[
+{f:'Pregunta inicial al preparar una charla',b:'¿Qué quiero que hagan distinto mañana? (una conducta observable)'},
+{f:'Estructura de 6 pasos',b:'Gancho, mensaje central, máximo 3 puntos, prueba, verificación, acción y cierre.'},
+{f:'Regla del pico y el final',b:'Se recuerda una experiencia por su momento más intenso y por su final.'},
+{f:'Principio de redundancia (Mayer)',b:'No leas el texto de la lámina: voz y texto idéntico compiten.'},
+{f:'Tiempo de espera (Rowe)',b:'Tras una pregunta, espera de 3 a 5 segundos antes de seguir.'},
+{f:'Técnicas de novelista para charlas',b:'Anunciar el final, detalle exacto, confesión, ironía, gancho final y ritmo de frases.'},
+{f:'Ilusión de transparencia',b:'Los nervios del orador se notan mucho menos de lo que él cree.'}
+]
+},
+
+/* ================= MÓDULO 7 ================= */
+{
+id:'m7', icono:'⛑️', titulo:'Aplicado a charlas y capacitaciones SST', sub:'Charla de 5 minutos, inducción, capacitación técnica y medición', min:16,
+relato:{t:'Capítulo 7 · El grillete en el bolsillo', h:`
+<p class="drop">Rosa no dijo «buenos días». No pidió que firmaran. Sacó el grillete deformado del bolsillo, lo levantó a la altura de los ojos y esperó. Cuatro segundos. Cinco. El motor de la chata se calló justo en ese momento, como si estuviera en el guion.</p>
+<p class="dlg">«Esto pesa un kilo doscientos. En 2009 pasó a un metro de la cabeza de alguien que está aquí. Teodoro, ¿lo cuentas tú o lo cuento yo?»</p>
+<p>Teodoro lo contó. Mal, con desorden, con una ráfaga de viento que Rosa sospechaba inventada. Pero veinte cabezas giraron hacia él y no volvieron a moverse.</p>
+<p>Rosa dijo su frase de nueve palabras. La dijo al principio, la repitió en el medio y la hizo repetir al final, en coro, entre risas. Le pidió al muchacho de Nauta que mostrara dónde se pararía cuando la grúa girara. Se equivocó; lo corrigió sin burla; lo volvió a intentar y acertó. Cinco minutos exactos.</p>
+<p>No supo si había funcionado hasta tres semanas después.</p>
+<p>Un jueves, a las diez de la mañana, una tubería subía hacia la chata. Wilder, apurado, dio un paso hacia la zona de la carga para acomodar la soga guía. Antes de que Rosa abriera la boca, Teodoro lo jaló del chaleco y le dijo, sin mirarlo, con los ojos en la carga, nueve palabras.</p>
+<p>Rosa las contó. Eran las suyas.</p>
+<p>Ese día entendió la diferencia entre dar una charla y lograr que algo se quede. Este último módulo es el manual de esa diferencia.</p>`},
+secciones:[
+{t:'La charla de 5 minutos, minuto a minuto', h:`
+<div data-widget="charla5"></div>
+<div class="callout amber"><b>Regla de oro:</b> una charla = una conducta. Si tienes tres temas, tienes tres charlas para tres días distintos (y de paso ganas repaso espaciado).</div>`,
+dato:'Williamson y Feyer (2000) midieron el rendimiento de personas sin dormir. Tras 17 a 19 horas despiertas, su desempeño en pruebas de atención y reacción era comparable al de alguien con 0.05% de alcohol en sangre. Tras más horas, equivalente a 0.1%. Una charla al final de un turno nocturno se da, en términos cerebrales, ante un público que "tomó unas cervezas".',
+tip:'Si te toca dar la charla al cambio de turno, dirígela al turno que entra (descansado), no al que sale. Y pide al que sale que cuente un hallazgo de su turno: así participan sin tener que retener nada nuevo.',
+gancho:'La charla de 5 minutos es un sprint. La inducción del personal nuevo es otra carrera, con otra trampa.',
+check:{p:'¿Qué haces en el último minuto de una charla de 5 minutos?', r:'Pides un compromiso concreto para hoy y repites el mensaje central.'}},
+{t:'Inducción a personal nuevo', h:`
+<p>El primer día, el cerebro del nuevo está saturado: lugar nuevo, caras nuevas, ruido, normas. Si le das 40 temas, retendrá muy pocos y al azar.</p>
+<ul>
+<li><b>Prioriza lo vital del día 1:</b> riesgos críticos de su puesto, qué hacer en emergencia, a quién preguntar, cómo detener un trabajo.</li>
+<li><b>Espacia el resto</b> durante la primera semana.</li>
+<li><b>Asigna un acompañante</b> con experiencia.</li>
+<li><b>Verifica</b> con preguntas abiertas y recorrido por el área.</li>
+</ul>
+<div class="callout cyan">La Ley 29783 exige capacitar al trabajador al ingresar y de forma periódica. Cumplir el registro es obligatorio; lograr que aprenda es tu verdadero objetivo.</div>`,
+dato:'Gabriel Radvansky (2011) descubrió algo que te ha pasado: entras a un cuarto a buscar algo y olvidas qué buscabas. En sus experimentos, cruzar una puerta hacía que las personas olvidaran más que si recorrían la misma distancia dentro del mismo cuarto. El cerebro trata la puerta como el fin de un "episodio" y archiva lo anterior. El primer día del nuevo está lleno de puertas: oficina, almacén, muelle, comedor.',
+tip:'Haz la inducción de cada riesgo en el lugar donde existe, y repite lo crítico al cruzar a la siguiente área: "antes de entrar al muelle, ¿qué es lo único que no harás?".',
+gancho:'Cuando lo que enseñas es una habilidad, hay un método que la industria usa desde la Segunda Guerra Mundial.',
+check:{p:'¿Qué debe priorizar la inducción del primer día?', r:'Riesgos críticos del puesto, respuesta ante emergencias, a quién preguntar y cómo detener un trabajo inseguro. El resto se espacia en la semana.'}},
+{t:'Capacitación técnica: el método TWI', h:`
+<p>Para enseñar una habilidad (izaje, uso de arnés, extintor), usa el método de <b>Instrucción de Trabajo</b> (TWI):</p>
+<ol class="steps">
+<li><b>Preparar:</b> ubica al trabajador, explora qué sabe ya, despierta interés.</li>
+<li><b>Presentar:</b> explica y muestra paso a paso, resaltando los puntos clave y el porqué.</li>
+<li><b>Probar:</b> que lo haga él, primero guiado y luego solo, explicando cada paso. Corrige en el momento.</li>
+<li><b>Seguimiento:</b> obsérvalo en el trabajo real los días siguientes.</li>
+</ol>
+<div class="callout amber">El lema de TWI: "Si el trabajador no ha aprendido, el instructor no ha enseñado." Revisa tu método antes que culparlo.</div>`,
+dato:'TWI nació en Estados Unidos en 1940, cuando las fábricas de guerra tuvieron que entrenar a millones de trabajadores sin experiencia, muchos de ellos mujeres que nunca habían pisado una planta. Se capacitó a más de un millón y medio de supervisores con este método. Después de la guerra, EE. UU. lo dejó de lado; Japón lo adoptó, y Toyota lo integró en su sistema de producción.',
+tip:'En el paso "Probar", pide que el trabajador diga en voz alta el porqué de cada punto clave mientras lo hace. Juntas recuperación, producción y memoria procedimental.',
+gancho:'Las habilidades se enseñan practicando. Los incidentes se enseñan contando. Pero contarlos bien es un arte con trampas.',
+check:{p:'¿Cuáles son los 4 pasos del método de instrucción de trabajo?', r:'Preparar, presentar, probar (que lo haga) y seguimiento.'}},
+{t:'Lecciones aprendidas de incidentes', h:`
+<p>Un incidente bien contado es la historia más poderosa que tienes. Mal contado, genera miedo, burla o defensas.</p>
+<ul>
+<li><b>Cuenta qué pasó</b> con hechos, sin nombres si no es necesario.</li>
+<li><b>Explica por qué tenía sentido</b> para quien lo hizo en ese momento (presión, costumbre, información incompleta). Así el público se identifica: "eso me podría pasar a mí".</li>
+<li><b>Muestra qué barrera falló</b> y qué cambia desde hoy.</li>
+<li><b>Cierra con una conducta</b> concreta.</li>
+</ul>
+<div class="callout cyan">Evita: buscar culpables en público, exagerar detalles, fotos de lesiones sin propósito.</div>`,
+dato:'Baruch Fischhoff (1975) describió el "sesgo retrospectivo": cuando conoces el resultado de un hecho, crees que era más predecible de lo que realmente era. Por eso, después de un incidente, todos dicen "era obvio que iba a pasar". Para quien estaba ahí, sin saber el final, no era obvio. Si cuentas el incidente desde el final, tu público juzgará al trabajador con una ventaja que él no tuvo.',
+tip:'Cuenta el incidente en tiempo presente y desde los ojos del trabajador, con la información que él tenía en ese momento. Pregunta al grupo: "¿qué habrías hecho tú aquí?" antes de revelar qué pasó.',
+gancho:'Contaste bien, verificaste, cerraste con acción. Falta la pregunta que Rosa se hizo durante tres semanas: ¿funcionó?',
+check:{p:'¿Por qué conviene explicar "por qué tenía sentido" la decisión para quien la tomó?', r:'Porque el público se identifica y entiende que le podría pasar a él, y contrarresta el sesgo retrospectivo.'}},
+{t:'¿Cómo sabes que aprendieron? Kirkpatrick', h:`
+<p>Donald Kirkpatrick propuso 4 niveles para evaluar una capacitación:</p>
+<table class="tbl">
+<tr><th>Nivel</th><th>Qué mide</th><th>Cómo en SST</th></tr>
+<tr><td>1. Reacción</td><td>¿Les gustó? ¿Les pareció útil?</td><td>Encuesta rápida de 2 preguntas</td></tr>
+<tr><td>2. Aprendizaje</td><td>¿Saben o saben hacer?</td><td>Preguntas orales, quiz, demostración inversa</td></tr>
+<tr><td>3. Conducta</td><td>¿Lo aplican en el trabajo?</td><td>TOP, inspecciones, observación en campo</td></tr>
+<tr><td>4. Resultados</td><td>¿Cambiaron los indicadores?</td><td>Incidentes, condiciones subestándar repetidas</td></tr>
+</table>
+<p>Teodoro jalando a Wilder del chaleco fue un nivel 3 en vivo. La lista de asistencia no está en ningún nivel.</p>
+<div class="callout amber">Esta app mide tu nivel 2 con el diagnóstico inicial y el examen final (ganancia de aprendizaje).</div>`,
+dato:'Kirkpatrick publicó su modelo en 1959, a partir de su tesis doctoral, en una serie de artículos para una revista de capacitadores. Más de sesenta años después sigue siendo el modelo de evaluación de capacitación más usado del mundo. Su crítica más repetida coincide con la de Rosa: la mayoría de empresas se queda en el nivel 1, la encuesta de satisfacción.',
+tip:'Cada vez que des una charla importante, anota en tu agenda una fecha 2 o 3 semanas después para observar esa conducta en campo. Es tu nivel 3 programado.',
+gancho:'Y para que nada de esto dependa de tu memoria (que ya sabes que es frágil), cierra con una lista.',
+check:{p:'¿En qué nivel de Kirkpatrick encaja una Tarjeta de Observación Preventiva (TOP) que verifica si se aplica lo enseñado?', r:'Nivel 3: conducta en el trabajo.'}},
+{t:'Checklist del buen comunicador', h:`
+<div class="checklist">
+<h4>Antes</h4>
+<label><input type="checkbox"> Definí la conducta que quiero lograr</label>
+<label><input type="checkbox"> Tengo el mensaje en menos de 15 palabras</label>
+<label><input type="checkbox"> Preparé un gancho (pregunta, final anunciado o confesión)</label>
+<label><input type="checkbox"> Tengo una historia o un objeto real</label>
+<label><input type="checkbox"> Elegí lugar con sombra, lejos del ruido y cerca de donde ocurre la conducta</label>
+<label><input type="checkbox"> Ensayé los primeros 30 segundos en voz alta</label>
+<h4>Durante</h4>
+<label><input type="checkbox"> Empecé con el gancho, sin trámites</label>
+<label><input type="checkbox"> Máximo 3 ideas, sin siglas sin explicar</label>
+<label><input type="checkbox"> Hice pausas, usé nombres y miré a todos</label>
+<label><input type="checkbox"> Pregunté abierto y esperé 5 segundos</label>
+<label><input type="checkbox"> Pedí teach-back o demostración inversa</label>
+<h4>Después</h4>
+<label><input type="checkbox"> Cerré con un compromiso concreto y el mensaje repetido</label>
+<label><input type="checkbox"> Anuncié un gancho para la próxima charla</label>
+<label><input type="checkbox"> Registré cómo me fue (sección Charla)</label>
+<label><input type="checkbox"> Programé observar la conducta en campo (nivel 3)</label>
+</div>`,
+dato:'En 2009, un equipo liderado por Alex Haynes y Atul Gawande probó una lista de verificación de 19 puntos en quirófanos de ocho ciudades del mundo. La mortalidad bajó de alrededor de 1.5% a 0.8%, y las complicaciones cayeron cerca de un tercio. Expertos con años de experiencia mejoraron con una hoja de papel, porque la lista no depende de la memoria de trabajo bajo presión.',
+tip:'Imprime este checklist en tamaño bolsillo y llévalo en el casco o el chaleco. Revísalo 1 minuto antes de cada charla.',
+gancho:'Fin de la historia de Rosa. La tuya empieza ahora: ve a la sección Charla, planifica la próxima con la estructura y, después de darla, autoevalúate.',
+check:{p:'Después de la charla, ¿qué dos acciones aseguran que el aprendizaje dure y se aplique?', r:'Programar un repaso espaciado (o un gancho a la próxima charla) y observar en campo si se aplica la conducta (nivel 3).'}}
+],
+claves:['Una charla = una conducta.','Fatiga de 17-19 h ≈ 0.05% de alcohol: cuida el horario.','Inducción: lo vital primero, en el lugar, el resto espaciado.','Habilidades: preparar, presentar, probar, seguimiento (TWI).','Incidentes: desde los ojos del trabajador, contra el sesgo retrospectivo.','Mide con Kirkpatrick: la firma no es evidencia.','Una lista no depende de tu memoria bajo presión.'],
+quiz:[
+{t:'mc',d:true,p:'Tienes 3 temas importantes para la charla de 5 minutos de mañana. ¿Qué haces?',o:['Los das todos rápido','Eliges uno y los otros los programas para días siguientes','Repartes un folleto con los tres','Alargas la charla a 20 minutos'],c:1,e:'Una charla, una conducta. Además ganas repaso espaciado.'},
+{t:'mc',d:true,p:'¿Qué nivel de Kirkpatrick evalúa si el trabajador aplica lo aprendido en su puesto?',o:['Nivel 1: reacción','Nivel 2: aprendizaje','Nivel 3: conducta','Nivel 4: resultados'],c:2,e:'El nivel 3 observa la conducta en el trabajo real (TOP, inspecciones).'},
+{t:'orden',p:'Ordena los pasos de la instrucción de trabajo (TWI):',items:['Preparar al trabajador','Presentar la operación','Probar: que lo haga él','Seguimiento en el trabajo'],e:'Preparar, presentar, probar, seguimiento.'},
+{t:'mc',p:'En la inducción del primer día, ¿qué priorizas?',o:['Historia de la empresa y organigrama','Todos los procedimientos del área','Riesgos críticos, emergencias, a quién preguntar y cómo detener un trabajo','Indicadores del año anterior'],c:2,e:'Lo vital primero; el resto, espaciado en la semana.'},
+{t:'vf',p:'Al contar una lección aprendida conviene explicar por qué la decisión tenía sentido para quien la tomó.',c:true,e:'Genera identificación y contrarresta el sesgo retrospectivo.'},
+{t:'mc',p:'Después de un incidente, todos dicen "era obvio que iba a pasar". Es el sesgo:',o:['Retrospectivo','De primacía','De producción','De superioridad de la imagen'],c:0,e:'Conocer el resultado hace que parezca más predecible de lo que era (Fischhoff).'},
+{t:'mc',p:'Según Williamson y Feyer, 17 a 19 horas sin dormir equivalen en rendimiento a:',o:['Estar descansado','Unos 0.05% de alcohol en sangre','Haber dormido 4 horas','No hay efecto medible'],c:1,e:'La fatiga deteriora la atención como el alcohol.'},
+{t:'mc',p:'Un quiz corto al final de la capacitación mide principalmente el nivel:',o:['1','2','3','4'],c:1,e:'Nivel 2: aprendizaje (saber o saber hacer).'},
+{t:'mc',p:'¿Qué haces en el minuto 4 de una charla de 5 minutos?',o:['Repartir la lista de asistencia','Verificar comprensión con una pregunta abierta o teach-back','Contar un chiste','Leer el procedimiento'],c:1,e:'Antes de cerrar, verifica que el mensaje llegó.'}
+],
+cartas:[
+{f:'Regla de la charla de 5 minutos',b:'Una charla = una conducta.'},
+{f:'Prioridades del día 1 de inducción',b:'Riesgos críticos, emergencias, a quién preguntar y cómo detener un trabajo.'},
+{f:'Método TWI',b:'Preparar, presentar, probar (que lo haga) y seguimiento.'},
+{f:'4 niveles de Kirkpatrick',b:'Reacción, aprendizaje, conducta y resultados.'},
+{f:'Sesgo retrospectivo',b:'Conociendo el final, todo parece predecible. Cuenta el incidente desde los ojos del trabajador.'},
+{f:'Fatiga y rendimiento',b:'17-19 h sin dormir ≈ 0.05% de alcohol en sangre (Williamson y Feyer, 2000).'},
+{f:'¿Qué mide la lista de asistencia?',b:'Solo asistencia. No está en ningún nivel de Kirkpatrick.'}
+]
+}
+];
+
+/* Zonas del widget cerebro */
+const ZONAS_CEREBRO = {
+prefrontal:{n:'Corteza prefrontal',f:'El jefe de turno: dirige la atención, sostiene la memoria de trabajo, planifica y frena impulsos. Se fatiga y se bloquea con el estrés intenso.',c:'#f59e0b'},
+motora:{n:'Corteza motora',f:'Planifica y ejecuta los movimientos voluntarios. Se entrena con práctica física.',c:'#a78bfa'},
+temporal:{n:'Corteza temporal (auditiva y lenguaje)',f:'Procesa lo que oyes y el significado de las palabras. Con ruido de fondo trabaja el doble.',c:'#22c55e'},
+occipital:{n:'Corteza visual',f:'Procesa lo que ves. Una imagen clara se procesa en paralelo a tu voz.',c:'#06b6d4'},
+hipocampo:{n:'Hipocampo',f:'El archivador: registra lo nuevo y lo consolida en la corteza, sobre todo mientras duermes. Tiene forma curva y su nombre significa "caballito de mar".',c:'#f472b6'},
+amigdala:{n:'Amígdala',f:'El detector de alarmas: marca lo emocional como importante. Con miedo intenso toma el control y apaga el razonamiento. Su nombre significa "almendra" por su forma.',c:'#ef4444'},
+talamo:{n:'Tálamo',f:'La puerta de entrada: filtra y distribuye casi toda la información sensorial hacia la corteza. El olfato es la excepción: llega más directo a la amígdala y al hipocampo, por eso un olor despierta recuerdos de golpe.',c:'#eab308'},
+dopamina:{n:'Sistema de recompensa (dopamina)',f:'Señala lo inesperado y lo valioso, y motiva a buscar. La curiosidad lo enciende.',c:'#fb923c'},
+cerebelo:{n:'Cerebelo',f:'Coordina y afina movimientos y rutinas. Ocupa cerca del 10% del volumen del cerebro pero contiene alrededor del 80% de sus neuronas.',c:'#38bdf8'}
+};
+
+const ETAPAS_MEMORIA = [
+{n:'Atención',i:'🎯',d:'El tálamo y la corteza prefrontal seleccionan qué entra. Lo que no se atiende se pierde en segundos.'},
+{n:'Memoria de trabajo',i:'🧮',d:'La "mesa" mental: sostiene unas 4 unidades mientras las procesas.'},
+{n:'Codificación',i:'✍️',d:'El hipocampo conecta lo nuevo con lo que ya sabes. Más conexiones = recuerdo más fuerte.'},
+{n:'Consolidación',i:'🌙',d:'Con el sueño y los repasos espaciados, el recuerdo frágil se vuelve estable en la corteza.'},
+{n:'Recuperación',i:'🔁',d:'Traer el recuerdo de vuelta. Cada recuperación lo fortalece (y lo reconstruye).'}
+];
+
+const RUBRICA = [
+'Mensaje central claro (una conducta)',
+'Gancho inicial sin trámites',
+'Máximo 3 ideas',
+'Historia, dato local, objeto o demostración',
+'Lenguaje concreto, sin jerga ni siglas sin explicar',
+'Voz: volumen, ritmo y pausas',
+'Mirada, gestos y postura coherentes',
+'Preguntas abiertas con tiempo de espera',
+'Verificación de comprensión (teach-back o demostración)',
+'Cierre con compromiso concreto (y gancho a la próxima)'
+];
+
+'use strict';
+/* ========== Utilidades ========== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const DAY=864e5, now=()=>Date.now();
+const fmtF=t=>new Date(t).toLocaleDateString('es-PE',{day:'2-digit',month:'short',year:'numeric'});
+const nota20=p=>Math.round(p*20)/100; // p en %
+const view=()=>$('#view');
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2300)}
+
+/* ========== Persistencia: IndexedDB con patrón repositorio ========== */
+const DB={db:null,ok:false,
+  open(){return new Promise(res=>{try{const r=indexedDB.open('neurocomunica',1);
+    r.onupgradeneeded=()=>{const d=r.result;d.createObjectStore('kv',{keyPath:'k'});d.createObjectStore('intentos',{keyPath:'id',autoIncrement:true});d.createObjectStore('tarjetas',{keyPath:'id'});d.createObjectStore('charlas',{keyPath:'id',autoIncrement:true})};
+    r.onsuccess=()=>{this.db=r.result;this.ok=true;res()};r.onerror=()=>res()}catch(e){res()}})}};
+class Repo{
+  constructor(store){this.s=store;this.mem=new Map();this.seq=1}
+  _st(m){return DB.db.transaction(this.s,m).objectStore(this.s)}
+  _p(q){return new Promise((res,rej)=>{q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}
+  async all(){if(!DB.ok)return[...this.mem.values()];return this._p(this._st('readonly').getAll())}
+  async get(k){if(!DB.ok)return this.mem.get(k);return this._p(this._st('readonly').get(k))}
+  async put(v){if(!DB.ok){const key=v.k??v.id??(v.id=this.seq++);this.mem.set(key,v);return key}return this._p(this._st('readwrite').put(v))}
+  async del(k){if(!DB.ok)return this.mem.delete(k);return this._p(this._st('readwrite').delete(k))}
+  async clear(){if(!DB.ok)return this.mem.clear();return this._p(this._st('readwrite').clear())}
+}
+const R={kv:new Repo('kv'),intentos:new Repo('intentos'),tarjetas:new Repo('tarjetas'),charlas:new Repo('charlas')};
+
+/* ========== Estado en memoria ========== */
+const S={cfg:{nombre:'',vib:true,big:false,rate:1},prog:{},cards:{},intentos:[],charlas:[]};
+async function load(){
+  await DB.open();
+  const cfg=await R.kv.get('cfg');if(cfg)Object.assign(S.cfg,cfg.v);
+  const pr=await R.kv.get('prog');S.prog=pr?pr.v:{};
+  (await R.tarjetas.all()).forEach(c=>S.cards[c.id]=c);
+  S.intentos=(await R.intentos.all()).sort((a,b)=>a.fecha-b.fecha);
+  S.charlas=(await R.charlas.all()).sort((a,b)=>a.fecha-b.fecha);
+  MODULOS.forEach(m=>{if(!S.prog[m.id])S.prog[m.id]={leidas:[],best:null,n:0}});
+  document.documentElement.classList.toggle('big',!!S.cfg.big);
+}
+const saveCfg=()=>R.kv.put({k:'cfg',v:S.cfg});
+const saveProg=()=>R.kv.put({k:'prog',v:S.prog});
+
+/* ========== Preparación de contenido ========== */
+MODULOS.forEach((m,mi)=>{m.n=mi+1;m.quiz.forEach((q,i)=>q.id=m.id+'q'+(i+1));m.cartas.forEach((c,i)=>{c.id=m.id+'c'+i;c.mid=m.id})});
+const ALLQ=MODULOS.flatMap(m=>m.quiz.map(q=>({...q,mid:m.id})));
+const DIAGQ=ALLQ.filter(q=>q.d);
+const pages=m=>m.secciones.length+2; // relato + secciones + cierre
+const readFrac=m=>Math.min(1,(S.prog[m.id].leidas||[]).length/pages(m));
+const modDone=m=>readFrac(m)>=1;
+const modProg=m=>{const b=S.prog[m.id].best;return 0.6*readFrac(m)+0.4*((b??0)/100)};
+const totalProg=()=>MODULOS.reduce((a,m)=>a+modProg(m),0)/MODULOS.length;
+
+/* ========== Hápticos ========== */
+const vib=ms=>{if(S.cfg.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}};
+document.addEventListener('pointerdown',e=>{if(e.target.closest('button,.opt,label,input[type=checkbox],.flash,.zone'))vib(8)},{passive:true});
+document.addEventListener('input',e=>{if(e.target.matches('input.t,textarea.t'))vib(4)});
+
+/* ========== Voz ========== */
+function speak(el,btn){
+  if(!('speechSynthesis' in window))return toast('Tu navegador no tiene lectura en voz alta');
+  if(speechSynthesis.speaking){speechSynthesis.cancel();if(btn)btn.textContent='🔊 Escuchar';return}
+  const u=new SpeechSynthesisUtterance(el.innerText.replace(/➜/g,''));
+  const vs=speechSynthesis.getVoices();const v=vs.find(v=>/es[-_](PE|419|MX|US|CO)/i.test(v.lang))||vs.find(v=>/^es/i.test(v.lang));
+  if(v)u.voice=v;u.lang=v?v.lang:'es-PE';u.rate=S.cfg.rate||1;
+  u.onend=()=>{if(btn)btn.textContent='🔊 Escuchar'};
+  speechSynthesis.speak(u);if(btn)btn.textContent='⏹ Detener';
+}
+
+/* ========== Router ========== */
+const TAB={inicio:'inicio',aprender:'aprender',leer:'aprender',evaluar:'evaluar',quiz:'evaluar',diag:'evaluar',final:'evaluar',repasar:'repasar',charla:'charla',ajustes:''};
+function go(h){location.hash='#/'+h}
+function route(){
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  const p=(location.hash.replace(/^#\/?/,'')||'inicio').split('/');
+  const t=TAB[p[0]]??'inicio';
+  $$('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.go===t));
+  window.scrollTo(0,0);
+  const V={inicio:vInicio,aprender:vAprender,leer:()=>vLeer(p[1],+p[2]||0),evaluar:vEvaluar,quiz:()=>startQuiz('modulo',p[1]),diag:()=>startQuiz('diag'),final:()=>startQuiz('final'),repasar:()=>vRepasar(p[1],p[2]),charla:()=>vCharla(p[1]),ajustes:vAjustes};
+  (V[p[0]]||vInicio)();
+}
+
+/* ========== Componentes ========== */
+function ring(p,label){const r=46,c=2*Math.PI*r;return `<svg class="ring" viewBox="0 0 110 110"><circle cx="55" cy="55" r="${r}" fill="none" stroke="#26262d" stroke-width="10"/><circle cx="55" cy="55" r="${r}" fill="none" stroke="url(#gr)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p)}" transform="rotate(-90 55 55)"/><defs><linearGradient id="gr"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#06b6d4"/></linearGradient></defs><text x="55" y="58" text-anchor="middle" fill="#e8e8ec" font-family="monospace" font-size="22" font-weight="700">${Math.round(p*100)}%</text><text x="55" y="76" text-anchor="middle" fill="#9a9aa5" font-size="9">${label||''}</text></svg>`}
+const diagAtt=()=>S.intentos.find(a=>a.tipo==='diag');
+const finalAtts=()=>S.intentos.filter(a=>a.tipo==='final');
+function dueCards(){unlockCards();const t=now();return Object.values(S.cards).filter(c=>c.prox<=t)}
+function unlockCards(){MODULOS.forEach(m=>{if(modDone(m)||S.prog[m.id].n>0)m.cartas.forEach(c=>{if(!S.cards[c.id]){S.cards[c.id]={id:c.id,caja:1,prox:now(),ok:0,ko:0};R.tarjetas.put(S.cards[c.id])}})})}
+function allDatos(){return MODULOS.flatMap(m=>m.secciones.filter(s=>s.dato).map(s=>({m,s})))}
+
+/* ========== Vista: Inicio ========== */
+function vInicio(){
+  const tp=totalProg(),d=diagAtt(),f=finalAtts().slice(-1)[0];
+  const leidos=MODULOS.filter(modDone).length,aprob=MODULOS.filter(m=>(S.prog[m.id].best??0)>=70).length;
+  const sig=MODULOS.find(m=>!modDone(m));
+  const due=dueCards().length;
+  const ds=allDatos();const dd=ds[Math.floor(now()/DAY)%ds.length];
+  const hola=S.cfg.nombre?`Hola, ${esc(S.cfg.nombre)}`:'Hola';
+  view().innerHTML=`<div class="fade">
+  <div class="card hero">${ring(tp,'avance')}<div><h2 style="margin:0">${hola} 👋</h2><p class="muted small" style="margin:4px 0 10px">Aprende cómo aprende el cerebro y cómo comunicar para que tu mensaje se quede.</p>
+  ${sig?`<button class="btn pri" onclick="go('leer/${sig.id}/${firstUnread(sig)}')">${S.prog[sig.id].leidas.length?'Seguir':'Empezar'} · Cap. ${sig.n}</button>`:`<button class="btn pri" onclick="go('final')">Examen final</button>`}</div></div>
+  <div class="card"><h3>🗺️ Tu ruta</h3>
+   ${rutaItem(1,'Diagnóstico inicial',d?`Hecho: ${Math.round(d.pct)}%`:'Mide lo que sabes antes de empezar',!!d,"go('diag')")}
+   ${rutaItem(2,'Leer los 7 capítulos',`${leidos}/7 completos`,leidos===7,"go('aprender')")}
+   ${rutaItem(3,'Aprobar los 7 quizzes (≥70%)',`${aprob}/7 aprobados`,aprob===7,"go('evaluar')")}
+   ${rutaItem(4,'Examen final y ganancia',f?`Último: ${Math.round(f.pct)}%`:'Compara contra tu diagnóstico',!!f,"go('final')")}
+   ${rutaItem(5,'Aplicarlo en una charla real',`${S.charlas.filter(c=>c.tipo==='eval').length} autoevaluaciones`,S.charlas.some(c=>c.tipo==='eval'),"go('charla')")}
+  </div>
+  <div class="card row"><div class="grow"><h3 style="margin:0">🗂️ Repaso de hoy</h3><p class="muted small" style="margin:2px 0 0">${due?`${due} tarjeta${due>1?'s':''} esperando. El primer repaso es el que más rinde.`:'Al día. Las tarjetas se desbloquean al leer cada capítulo.'}</p></div>${due?`<button class="btn sec" onclick="go('repasar')">Repasar</button>`:''}</div>
+  ${dd?`<div class="dato"><h5>🔎 Dato insólito del día · Cap. ${dd.m.n}</h5>${esc(dd.s.dato)}<div style="margin-top:8px"><button class="btn speak" onclick="go('leer/${dd.m.id}/${dd.m.secciones.indexOf(dd.s)+1}')">Leer el contexto →</button></div></div>`:''}
+  </div>`;
+}
+function rutaItem(n,t,s,ok,on){return `<button class="mod" onclick="${on}"><div class="ic" style="font-size:1.2rem;${ok?'background:rgba(34,197,94,.15)':''}">${ok?'✅':`<b class="mono am">${n}</b>`}</div><div class="grow"><div class="t">${t}</div><div class="s">${s}</div></div><span class="muted">›</span></button>`}
+function firstUnread(m){const l=S.prog[m.id].leidas;for(let i=0;i<pages(m);i++)if(!l.includes(i))return i;return 0}
+
+/* ========== Vista: Aprender ========== */
+function vAprender(){
+  view().innerHTML=`<div class="fade"><h2>📖 La novela del cerebro que aprende</h2><p class="muted small">Siete capítulos. Cada uno abre con la historia de Rosa, una supervisora cuya primera charla fracasa, y sigue con la ciencia que explica por qué. Lee en orden: cada capítulo termina con un gancho al siguiente.</p>
+  ${MODULOS.map(m=>{const pr=S.prog[m.id],rf=readFrac(m);return `<button class="mod" onclick="go('leer/${m.id}/${firstUnread(m)}')"><div class="ic">${m.icono}</div><div class="grow"><div class="t">${m.n}. ${esc(m.titulo)}</div><div class="s">${esc(m.relato.t.split('·')[1]||'')} · ${m.min} min</div><div class="bar" style="margin-top:7px"><i style="width:${rf*100}%"></i></div><div class="row" style="gap:6px;margin-top:6px">${rf>=1?'<span class="tag ok">leído</span>':''}${pr.best!=null?`<span class="tag ${pr.best>=70?'ok':'am'}">quiz ${Math.round(pr.best)}%</span>`:''}</div></div></button>`}).join('')}</div>`;
+}
+
+/* ========== Vista: Lectura ========== */
+function vLeer(mid,pg){
+  const m=MODULOS.find(x=>x.id===mid);if(!m)return go('aprender');
+  const N=pages(m);pg=Math.max(0,Math.min(N-1,pg));
+  const pr=S.prog[m.id];if(!pr.leidas.includes(pg)){pr.leidas.push(pg);saveProg();if(modDone(m)){unlockCards();toast('Capítulo completo: tarjetas de repaso desbloqueadas')}}
+  const dots=Array.from({length:N},(_,i)=>`<i class="${i===pg?'c':pr.leidas.includes(i)?'r':''}"></i>`).join('');
+  let body='';
+  if(pg===0){body=`<div class="chap">Capítulo ${m.n}</div><h2>${esc(m.relato.t.split('·')[1]?.trim()||m.titulo)}</h2><div class="relato">${m.relato.h}</div><div class="gancho">Ahora, la ciencia detrás de la historia.</div>`}
+  else if(pg<=m.secciones.length){const s=m.secciones[pg-1];
+    body=`<div class="chap">${m.icono} ${esc(m.titulo)} · ${pg}/${m.secciones.length}</div><h2>${esc(s.t)}</h2>${s.h}
+    ${s.dato?`<div class="dato"><h5>🔎 Dato insólito</h5>${esc(s.dato)}</div>`:''}
+    ${s.tip?`<div class="tip"><h5>💡 Tip</h5>${esc(s.tip)}</div>`:''}
+    ${s.check?`<div class="check" id="chk"><div class="small cy">🧠 ¿Lo recuerdas? Respóndelo en tu mente antes de tocar.</div><div class="q">${esc(s.check.p)}</div><div class="ans">${esc(s.check.r)}</div><button class="btn speak" style="margin-top:8px" onclick="this.parentNode.classList.add('open');this.remove()">Ver respuesta</button></div>`:''}
+    ${s.gancho?`<div class="gancho">${esc(s.gancho)}</div>`:''}`}
+  else{body=`<div class="chap">Cierre del capítulo ${m.n}</div><h2>Ideas clave</h2><ul>${m.claves.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+    <div class="callout cyan">Ahora pon a prueba tu memoria. Recuperar lo leído es lo que lo fija (efecto de prueba).</div>
+    <div class="row"><button class="btn pri grow" onclick="go('quiz/${m.id}')">📝 Quiz del capítulo</button><button class="btn sec grow" onclick="go('repasar/practica/${m.id}')">🗂️ Tarjetas</button></div>
+    ${m.n<MODULOS.length?`<button class="btn full" style="margin-top:10px" onclick="go('leer/${MODULOS[m.n].id}/0')">Capítulo ${m.n+1}: ${esc(MODULOS[m.n].titulo)} →</button>`:''}`}
+  view().innerHTML=`<div class="fade lesson"><div class="lesson-head"><button class="ib" onclick="go('aprender')">←</button><div class="grow small muted">${esc(m.titulo)}</div><button class="btn speak" id="spk">🔊 Escuchar</button></div><div class="dots">${dots}</div><div id="lbody">${body}</div>
+  <div class="navrow"><button class="btn" ${pg===0?'disabled':''} onclick="go('leer/${m.id}/${pg-1}')">← Anterior</button>${pg<N-1?`<button class="btn pri" onclick="go('leer/${m.id}/${pg+1}')">Siguiente →</button>`:''}</div></div>`;
+  $('#spk').onclick=e=>speak($('#lbody'),e.currentTarget);
+  mountWidgets($('#lbody'));
+}
+
+/* ========== Widgets ========== */
+function mountWidgets(root){$$('[data-widget]',root).forEach(el=>{const f=W[el.dataset.widget];if(f)f(el)})}
+const W={
+cerebro(el){
+  const z=ZONAS_CEREBRO;
+  el.innerHTML=`<div class="w"><svg viewBox="0 0 400 285" role="img" aria-label="Mapa del cerebro">
+  <path d="M70,170 C38,120 78,48 172,38 C252,30 332,56 356,116 C372,160 346,200 300,201 C272,202 252,196 231,201 C202,208 170,216 140,211 C100,205 80,196 70,170 Z" fill="#1b1b21" stroke="#3a3a44" stroke-width="2"/>
+  <path d="M120,70 C140,90 130,110 150,125 M190,45 C185,75 200,95 190,120 M240,45 C230,70 250,90 245,115 M290,65 C280,85 300,105 290,125 M110,150 C150,140 190,145 240,150" fill="none" stroke="#2c2c35" stroke-width="2"/>
+  <path d="M238,203 L246,272 L262,272 L258,203 Z" fill="#202027" stroke="#3a3a44"/>
+  <ellipse class="zone" data-z="cerebelo" cx="298" cy="222" rx="46" ry="25" fill="${z.cerebelo.c}"/>
+  <ellipse class="zone" data-z="prefrontal" cx="110" cy="112" rx="44" ry="40" fill="${z.prefrontal.c}"/>
+  <ellipse class="zone" data-z="motora" cx="205" cy="62" rx="27" ry="20" fill="${z.motora.c}"/>
+  <ellipse class="zone" data-z="occipital" cx="330" cy="132" rx="24" ry="36" fill="${z.occipital.c}"/>
+  <ellipse class="zone" data-z="temporal" cx="190" cy="180" rx="58" ry="22" fill="${z.temporal.c}"/>
+  <ellipse class="zone" data-z="talamo" cx="228" cy="122" rx="16" ry="11" fill="${z.talamo.c}" stroke="#fff" stroke-dasharray="3 2"/>
+  <circle class="zone" data-z="dopamina" cx="165" cy="140" r="10" fill="${z.dopamina.c}" stroke="#fff" stroke-dasharray="3 2"/>
+  <ellipse class="zone" data-z="hipocampo" cx="222" cy="163" rx="22" ry="8" fill="${z.hipocampo.c}" stroke="#fff" stroke-dasharray="3 2"/>
+  <circle class="zone" data-z="amigdala" cx="190" cy="164" r="8" fill="${z.amigdala.c}" stroke="#fff" stroke-dasharray="3 2"/>
+  <g font-size="10" fill="#e8e8ec" pointer-events="none" font-family="system-ui">
+  <text x="78" y="112">Prefrontal</text><text x="186" y="66">Motora</text><text x="313" y="136">Visual</text><text x="136" y="194">Temporal</text><text x="275" y="226">Cerebelo</text>
+  <text x="248" y="118">Tálamo</text><text x="132" y="160">Dopamina</text><text x="246" y="168">Hipocampo</text><text x="176" y="186" font-size="9">Amígdala</text></g>
+  <text x="14" y="276" font-size="10" fill="#9a9aa5">← frente · línea punteada = estructura profunda</text></svg>
+  <div class="winfo" id="zinfo"><span class="muted">Toca una zona…</span></div></div>`;
+  $$('.zone',el).forEach(s=>s.addEventListener('click',()=>{$$('.zone',el).forEach(x=>x.classList.remove('on'));s.classList.add('on');const d=z[s.dataset.z];$('#zinfo',el).innerHTML=`<b style="color:${d.c}">${d.n}</b>${esc(d.f)}`}));
+},
+memoria(el){
+  el.innerHTML=`<div class="w flow">${ETAPAS_MEMORIA.map((e,i)=>`${i?'<div class="ar">▼</div>':''}<button data-i="${i}"><span class="fi">${e.i}</span><span><b>${i+1}. ${e.n}</b><span class="d small muted" style="display:none"><br>${esc(e.d)}</span></span></button>`).join('')}</div>`;
+  $$('button',el).forEach(b=>b.onclick=()=>{const on=b.classList.toggle('on');$('.d',b).style.display=on?'inline':'none'});
+},
+olvido(el){
+  const X=d=>30+d*11.3,Y=r=>170-r*1.5;
+  const sin=[];for(let d=0;d<=30;d+=.25)sin.push([d,100*(0.2+0.8*Math.exp(-d/1.2))]);
+  const rep=[1,3,7,16];const con=[];let base=0,S1=1.2;
+  for(let d=0;d<=30;d+=.25){const r=rep.filter(x=>x<=d);const last=r.length?r[r.length-1]:0;const st=S1*Math.pow(2.6,r.length);con.push([d,100*(0.2+0.8*Math.exp(-(d-last)/st))])}
+  const path=a=>'M'+a.map(([d,r])=>X(d).toFixed(1)+','+Y(r).toFixed(1)).join(' L');
+  el.innerHTML=`<div class="w"><svg viewBox="0 0 380 205"><g stroke="#26262d">${[0,25,50,75,100].map(v=>`<line x1="30" x2="370" y1="${Y(v)}" y2="${Y(v)}"/>`).join('')}</g>
+  <g font-size="9" fill="#9a9aa5">${[0,50,100].map(v=>`<text x="4" y="${Y(v)+3}">${v}%</text>`).join('')}${[0,1,3,7,16,30].map(d=>`<text x="${X(d)-3}" y="196">${d}</text>`).join('')}<text x="300" y="186">días</text></g>
+  <path id="pS" d="${path(sin)}" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+  <path id="pC" d="${path(con)}" fill="none" stroke="#06b6d4" stroke-width="2.5" style="display:none"/>
+  <g id="mk" style="display:none">${rep.map(d=>`<circle cx="${X(d)}" cy="${Y(100)}" r="4" fill="#f59e0b"/>`).join('')}</g></svg>
+  <div class="seg"><button class="on" data-m="s">Sin repaso</button><button data-m="c">Con repasos (días 1, 3, 7, 16)</button></div>
+  <p class="small muted" style="margin:6px 0 0">Curva ilustrativa con la forma descrita por Ebbinghaus. Los valores exactos cambian según el material y la persona. Los puntos ámbar son los repasos.</p></div>`;
+  $$('.seg button',el).forEach(b=>b.onclick=()=>{$$('.seg button',el).forEach(x=>x.classList.toggle('on',x===b));const c=b.dataset.m==='c';$('#pC',el).style.display=c?'':'none';$('#mk',el).style.display=c?'':'none';$('#pS',el).style.opacity=c?.35:1});
+},
+atencion(el){
+  const X=t=>30+t*22.5,Y=a=>160-a*1.3;
+  const base=[];for(let t=0;t<=15;t+=.25)base.push([t,40+50*Math.exp(-t/2.2)+35*Math.exp(-(15-t)/1.3)]);
+  const rei=[4,8,11.5];const con=base.map(([t,a])=>[t,Math.min(95,a+rei.reduce((s,r)=>s+(t>=r?38*Math.exp(-(t-r)/1.4):0),0))]);
+  const path=a=>'M'+a.map(([t,v])=>X(t).toFixed(1)+','+Y(v).toFixed(1)).join(' L');
+  el.innerHTML=`<div class="w"><svg viewBox="0 0 380 190"><g stroke="#26262d"><line x1="30" x2="370" y1="${Y(0)}" y2="${Y(0)}"/><line x1="30" x2="30" y1="20" y2="${Y(0)}"/></g>
+  <g font-size="9" fill="#9a9aa5"><text x="2" y="${Y(90)}">alta</text><text x="2" y="${Y(10)}">baja</text>${[0,5,10,15].map(t=>`<text x="${X(t)-3}" y="${Y(0)+14}">${t}</text>`).join('')}<text x="320" y="${Y(0)+26}">minutos</text>
+  <text x="${X(0)}" y="18" fill="#f59e0b">primacía</text><text x="${X(13)}" y="18" fill="#f59e0b">recencia</text></g>
+  <path id="aB" d="${path(base)}" fill="none" stroke="#ef4444" stroke-width="2.5"/><path id="aC" d="${path(con)}" fill="none" stroke="#06b6d4" stroke-width="2.5" style="display:none"/>
+  <g id="aM" style="display:none" font-size="9" fill="#f59e0b">${rei.map((r,i)=>`<text x="${X(r)-8}" y="${Y(97)}">${['❓','🧰','📖'][i]}</text>`).join('')}</g></svg>
+  <div class="seg"><button class="on" data-m="b">Charla plana</button><button data-m="c">Con reinicios (pregunta, objeto, historia)</button></div>
+  <p class="small muted" style="margin:6px 0 0">Gráfico ilustrativo: la atención fluctúa; cada cambio de actividad la levanta de nuevo.</p></div>`;
+  $$('.seg button',el).forEach(b=>b.onclick=()=>{$$('.seg button',el).forEach(x=>x.classList.toggle('on',x===b));const c=b.dataset.m==='c';$('#aC',el).style.display=c?'':'none';$('#aM',el).style.display=c?'':'none';$('#aB',el).style.opacity=c?.35:1});
+},
+charla5(el){
+  const L=[['0:00','Gancho','Levanta el grillete deformado. «Esto pasó a un metro de la cabeza de alguien que está aquí.» Nada de "buenos días, hoy les voy a hablar de".'],
+  ['0:30','Mensaje central','Una conducta, una frase: «Nadie se para debajo de una carga suspendida.»'],
+  ['1:00','Por qué y cómo + prueba','Máximo 3 ideas. Historia de 30 segundos o demostración con el objeto. Usa nombres.'],
+  ['3:00','Verificación','«Wilder, muéstrame dónde te pararías cuando la grúa gire.» Espera 5 segundos tras cada pregunta.'],
+  ['4:00','Compromiso y cierre','«¿Qué harás distinto hoy?» Dos o tres respuestas en voz alta. Repite el mensaje central. Gancho: «Mañana les cuento qué encontramos en la eslinga.»']];
+  el.innerHTML=`<div class="w tl">${L.map(([t,n,d])=>`<div class="m"><b>${t}</b><div><b class="cy">${n}</b><br><span class="small">${esc(d)}</span></div></div>`).join('')}<p class="small muted" style="margin:4px 2px 0">La firma de asistencia va al final, cuando ya cerraste. Nunca al inicio: te roba la primacía.</p></div>`;
+}};
+
+/* ========== Motor de evaluación ========== */
+let Q=null;
+function startQuiz(tipo,mid){
+  let pre,titulo;
+  if(tipo==='modulo'){const m=MODULOS.find(x=>x.id===mid);if(!m)return go('evaluar');pre=shuffle(m.quiz.map(q=>({...q,mid:m.id})));titulo=`Quiz · Cap. ${m.n}: ${m.titulo}`}
+  else if(tipo==='diag'){if(diagAtt()&&!confirm('Ya hiciste el diagnóstico. Si lo repites, para medir tu ganancia se seguirá usando el primero. ¿Repetir de todos modos?'))return go('evaluar');pre=shuffle(DIAGQ);titulo='Diagnóstico inicial'}
+  else{if(!diagAtt()&&!confirm('Aún no haces el diagnóstico inicial, así que no podrás ver tu ganancia de aprendizaje. ¿Continuar?'))return go('evaluar');
+    const extra=shuffle(ALLQ.filter(q=>!q.d)).slice(0,11);pre=shuffle([...DIAGQ,...extra]);titulo='Examen final'}
+  Q={tipo,mid,titulo,qs:pre.map(prep),i:0,res:[],t0:now(),sel:[]};
+  renderQ();
+}
+function prep(q){const o={...q};if(q.t==='mc')o.ord=shuffle(q.o.map((_,i)=>i));if(q.t==='orden')o.mix=shuffle(q.items.map((_,i)=>i));return o}
+function renderQ(){
+  const q=Q.qs[Q.i],n=Q.qs.length;Q.sel=[];
+  let opts='';
+  if(q.t==='mc')opts=q.ord.map(i=>`<button class="opt" data-i="${i}">${esc(q.o[i])}</button>`).join('');
+  else if(q.t==='vf')opts=`<button class="opt" data-v="1">✅ Verdadero</button><button class="opt" data-v="0">❌ Falso</button>`;
+  else opts=`<p class="small muted">Toca los elementos en el orden correcto.</p><div class="ordlist">${q.mix.map(i=>`<button class="opt" data-k="${i}"><span class="n"></span>${esc(q.items[i])}</button>`).join('')}</div><div class="row"><button class="btn grow" id="oR">Reiniciar</button><button class="btn pri grow" id="oC" disabled>Comprobar</button></div>`;
+  view().innerHTML=`<div class="fade"><div class="qhead"><button class="ib" onclick="if(confirm('¿Salir? Se perderá este intento.'))go('evaluar')">✕</button><span class="small muted">${esc(Q.titulo)}</span><span class="mono am">${Q.i+1}/${n}</span></div>
+  <div class="bar"><i style="width:${Q.i/n*100}%"></i></div>
+  <div class="card" style="margin-top:12px"><div class="small cy">${q.t==='vf'?'Verdadero o falso':q.t==='orden'?'Ordenar':'Opción múltiple'}</div><div class="qp">${esc(q.p)}</div><div id="opts">${opts}</div><div id="fb"></div></div></div>`;
+  if(q.t==='mc')$$('#opts .opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i===q.c,b));
+  else if(q.t==='vf')$$('#opts .opt').forEach(b=>b.onclick=()=>answer((b.dataset.v==='1')===q.c,b));
+  else{const bs=$$('.ordlist .opt');
+    bs.forEach(b=>b.onclick=()=>{if(b.classList.contains('sel'))return;Q.sel.push(+b.dataset.k);b.classList.add('sel');$('.n',b).textContent=Q.sel.length;$('#oC').disabled=Q.sel.length<q.items.length});
+    $('#oR').onclick=()=>{Q.sel=[];bs.forEach(b=>{b.classList.remove('sel');$('.n',b).textContent=''});$('#oC').disabled=true};
+    $('#oC').onclick=()=>{const ok=Q.sel.every((k,i)=>k===i);bs.forEach(b=>{const k=+b.dataset.k;b.classList.add(Q.sel.indexOf(k)===k?'ok':'bad')});$('#oR').remove();$('#oC').remove();answer(ok,null,`Orden correcto: ${q.items.map((t,i)=>(i+1)+'. '+t).join(' → ')}`)}}
+}
+function answer(ok,btn,extra){
+  const q=Q.qs[Q.i];
+  $$('#opts .opt').forEach(b=>{b.disabled=true;if(q.t==='mc'&&+b.dataset.i===q.c)b.classList.add('ok');if(q.t==='vf'&&(b.dataset.v==='1')===q.c)b.classList.add('ok')});
+  if(btn&&!ok)btn.classList.add('bad');
+  vib(ok?15:[30,40,30]);
+  Q.res.push({id:q.id,ok});
+  const last=Q.i===Q.qs.length-1;
+  $('#fb').innerHTML=`<div class="fb ${ok?'ok':'bad'}"><b>${ok?'¡Correcto!':'No exactamente.'}</b> ${esc(q.e)}${extra?`<div class="small" style="margin-top:6px">${esc(extra)}</div>`:''}</div><button class="btn pri full" id="nx">${last?'Ver resultado':'Siguiente →'}</button>`;
+  $('#nx').onclick=()=>{if(last)finishQ();else{Q.i++;renderQ()}};
+  $('#nx').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+async function finishQ(){
+  const okN=Q.res.filter(r=>r.ok).length,n=Q.res.length,pct=okN/n*100;
+  const att={tipo:Q.tipo,mid:Q.mid||null,fecha:now(),pct,ok:okN,n,seg:Math.round((now()-Q.t0)/1000),det:Q.res};
+  att.id=await R.intentos.put(att);S.intentos.push(att);
+  if(Q.tipo==='modulo'){const p=S.prog[Q.mid];p.n=(p.n||0)+1;p.best=Math.max(p.best??0,pct);saveProg();unlockCards()}
+  const qmap=Object.fromEntries(Q.qs.map(q=>[q.id,q]));
+  const g=Q.tipo==='final'?ganancia():null;
+  const msg=pct>=90?'Excelente. Esto ya está en tu memoria de largo plazo… si lo repasas.':pct>=70?'Aprobado. Repasa los errores: con la explicación correcta se graban mejor (efecto de hipercorrección).':pct>=50?'Vas en camino. Vuelve a leer las secciones de tus errores y repite en unos días.':'Normal si es tu primer intento. Cada error con explicación te deja más que una respuesta adivinada.';
+  view().innerHTML=`<div class="fade"><div class="card" style="text-align:center"><div class="small muted">${esc(Q.titulo)}</div><div class="big-score">${Math.round(pct)}%</div>
+  <div class="mono">Nota vigesimal: <b class="${pct>=70?'okc':'am'}">${nota20(pct).toFixed(1)}</b>/20 · ${okN}/${n} correctas · ${Math.floor(att.seg/60)}:${String(att.seg%60).padStart(2,'0')} min</div>
+  <p class="small" style="margin:10px 0 0">${msg}</p></div>
+  ${g?ganCard(g):''}
+  ${Q.tipo==='diag'?`<div class="callout cyan">Guardado como tu línea base. Al final rendirás el examen final, que incluye estas mismas ${DIAGQ.length} preguntas, y verás cuánto aprendiste.</div>`:''}
+  <div class="card"><h3>Revisión</h3>${Q.res.map((r,i)=>{const q=qmap[r.id];return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><div>${r.ok?'✅':'❌'} <span class="small">${esc(q.p)}</span></div>${r.ok?'':`<div class="small cy" style="margin-top:4px">${esc(q.t==='mc'?'Respuesta: '+q.o[q.c]:q.t==='vf'?'Respuesta: '+(q.c?'Verdadero':'Falso'):'Orden: '+q.items.join(' → '))}. ${esc(q.e)}</div>`}</div>`}).join('')}</div>
+  <div class="row">${Q.tipo==='modulo'?`<button class="btn grow" onclick="go('quiz/${Q.mid}')">Repetir</button>`:''}<button class="btn pri grow" onclick="go('evaluar')">Volver a Evaluar</button></div></div>`;
+}
+function ganancia(){
+  const d=diagAtt(),f=finalAtts().slice(-1)[0];if(!d||!f)return null;
+  const ids=new Set(DIAGQ.map(q=>q.id));
+  const sc=a=>{const r=a.det.filter(x=>ids.has(x.id));return r.length?r.filter(x=>x.ok).length/r.length*100:0};
+  const pre=sc(d),post=sc(f),g=pre>=100?0:(post-pre)/(100-pre);
+  return {pre,post,g};
+}
+function ganCard(g){
+  const lv=g.g>=.7?['alta','okc']:g.g>=.3?['media','am']:g.g>0?['baja','badc']:['sin ganancia','badc'];
+  return `<div class="card"><h3>📈 Ganancia de aprendizaje</h3><div class="grid2"><div class="stat"><b>${Math.round(g.pre)}%</b><span>Antes (diagnóstico)</span></div><div class="stat"><b style="color:var(--cy)">${Math.round(g.post)}%</b><span>Después (mismas preguntas)</span></div></div>
+  <p style="margin:10px 0 0">Ganancia normalizada: <b class="mono ${lv[1]}">${g.g.toFixed(2)}</b> (<b>${lv[0]}</b>)</p><p class="small muted" style="margin:4px 0 0">Fórmula de Hake: (después − antes) / (100 − antes). Mide qué parte de lo que te faltaba saber aprendiste. Sobre 0.7 es alta; entre 0.3 y 0.7, media.</p></div>`;
+}
+
+/* ========== Vista: Evaluar ========== */
+function vEvaluar(){
+  const d=diagAtt(),fs=finalAtts(),g=ganancia();
+  const bars=MODULOS.map((m,i)=>{const b=S.prog[m.id].best??0;const h=b*1.2;return `<rect x="${18+i*48}" y="${130-h}" width="30" height="${h}" rx="4" fill="${b>=70?'#22c55e':b>0?'#f59e0b':'#26262d'}"/><text x="${33+i*48}" y="146" text-anchor="middle" font-size="10" fill="#9a9aa5">C${m.n}</text><text x="${33+i*48}" y="${124-h}" text-anchor="middle" font-size="10" fill="#e8e8ec" font-family="monospace">${b?Math.round(b):''}</text>`}).join('');
+  const hist=S.intentos.slice(-8).reverse();
+  view().innerHTML=`<div class="fade"><h2>📊 Evaluar y medir</h2>
+  <div class="card"><div class="row"><div class="grow"><h3 style="margin:0">1 · Diagnóstico inicial</h3><p class="small muted" style="margin:2px 0 0">${DIAGQ.length} preguntas, una o dos por capítulo. Hazlo antes de leer: es tu línea base.</p></div>${d?`<span class="tag ok">${Math.round(d.pct)}%</span>`:''}</div><button class="btn ${d?'':'pri'} full" style="margin-top:10px" onclick="go('diag')">${d?'Repetir (no cambia la línea base)':'Empezar diagnóstico'}</button></div>
+  <div class="card"><h3>2 · Quiz por capítulo</h3><p class="small muted" style="margin:0 0 8px">Aprobado desde 70% (14/20). Las preguntas y opciones se mezclan en cada intento.</p>
+  ${MODULOS.map(m=>{const p=S.prog[m.id];return `<button class="mod" style="padding:10px" onclick="go('quiz/${m.id}')"><div class="ic" style="width:40px;height:40px;font-size:1.3rem">${m.icono}</div><div class="grow"><div class="t small">${m.n}. ${esc(m.titulo)}</div><div class="s">${p.n?`${p.n} intento${p.n>1?'s':''} · mejor ${Math.round(p.best)}%`:'Sin intentos'}</div></div>${p.best!=null?`<span class="tag ${p.best>=70?'ok':'am'}">${nota20(p.best).toFixed(1)}</span>`:''}</button>`}).join('')}</div>
+  <div class="card"><div class="row"><div class="grow"><h3 style="margin:0">3 · Examen final</h3><p class="small muted" style="margin:2px 0 0">25 preguntas: las ${DIAGQ.length} del diagnóstico + ${25-DIAGQ.length} al azar. Así se compara antes y después con las mismas preguntas.</p></div>${fs.length?`<span class="tag ok">${Math.round(fs[fs.length-1].pct)}%</span>`:''}</div><button class="btn ${fs.length?'':'pri'} full" style="margin-top:10px" onclick="go('final')">${fs.length?'Repetir examen final':'Rendir examen final'}</button></div>
+  ${g?ganCard(g):''}
+  <div class="card"><h3>Mejor nota por capítulo</h3><svg class="chart" viewBox="0 0 350 152">${bars}<line x1="10" x2="345" y1="${130-84}" y2="${130-84}" stroke="#06b6d4" stroke-dasharray="4 3"/><text x="345" y="${126-84}" text-anchor="end" font-size="9" fill="#06b6d4">70%</text></svg></div>
+  <div class="card"><h3>Últimos intentos</h3>${hist.length?hist.map(a=>`<div class="row small" style="padding:6px 0;border-bottom:1px solid var(--line)"><span class="grow">${a.tipo==='diag'?'Diagnóstico':a.tipo==='final'?'Examen final':'Quiz cap. '+MODULOS.find(m=>m.id===a.mid)?.n}</span><span class="muted">${fmtF(a.fecha)}</span><b class="mono ${a.pct>=70?'okc':'am'}">${Math.round(a.pct)}%</b></div>`).join(''):'<p class="small muted">Todavía no hay intentos.</p>'}</div>
+  <div class="callout amber small">Esto mide el <b>nivel 2 de Kirkpatrick</b> (aprendizaje). El nivel 3 lo mides tú en campo: registra tus charlas reales en la pestaña Charla.</div></div>`;
+}
+
+/* ========== Vista: Repasar (Leitner) ========== */
+const INTERVALO={1:0,2:1,3:3,4:7,5:16};
+let RQ=null;
+function vRepasar(modo,mid){
+  unlockCards();
+  if(modo==='practica'){const m=MODULOS.find(x=>x.id===mid);if(!m)return go('repasar');RQ={practica:true,cola:shuffle(m.cartas.map(c=>c.id)),hechas:0,titulo:'Práctica libre · Cap. '+m.n};return renderCard()}
+  if(modo==='sesion'){const due=shuffle(dueCards().map(c=>c.id)).slice(0,20);if(!due.length)return go('repasar');RQ={practica:false,cola:due,hechas:0,falladas:new Set(),titulo:'Repaso de hoy'};return renderCard()}
+  const cs=Object.values(S.cards),due=dueCards().length,cnt=[1,2,3,4,5].map(b=>cs.filter(c=>c.caja===b).length);
+  const prox=cs.filter(c=>c.prox>now()).sort((a,b)=>a.prox-b.prox)[0];
+  view().innerHTML=`<div class="fade"><h2>🗂️ Repaso espaciado</h2><p class="small muted">Sistema Leitner: si recuerdas la tarjeta, sube de caja y vuelve más tarde (1, 3, 7 y 16 días). Si fallas, vuelve a la caja 1. Las tarjetas de cada capítulo se desbloquean al terminar de leerlo o al hacer su quiz.</p>
+  <div class="card"><div class="boxes">${cnt.map((n,i)=>`<div><b>${n}</b><span>Caja ${i+1}</span></div>`).join('')}</div>
+  <p class="small" style="margin:12px 0">${cs.length?`${cs.length} tarjetas desbloqueadas · <b class="cy">${cnt[4]}</b> dominadas (caja 5).`:'Aún no hay tarjetas. Termina de leer el capítulo 1.'}</p>
+  <button class="btn pri full" ${due?'':'disabled'} onclick="go('repasar/sesion')">${due?`Repasar ${Math.min(due,20)} tarjeta${due>1?'s':''} pendientes`:'Nada pendiente hoy'}</button>
+  ${!due&&prox?`<p class="small muted" style="margin:8px 0 0">Próximo repaso: ${fmtF(prox.prox)}</p>`:''}</div>
+  <div class="card"><h3>Práctica libre por capítulo</h3><p class="small muted" style="margin:0 0 8px">No altera tu calendario de repaso.</p>${MODULOS.map(m=>`<button class="mod" style="padding:10px" onclick="go('repasar/practica/${m.id}')"><div class="ic" style="width:40px;height:40px;font-size:1.3rem">${m.icono}</div><div class="grow t small">${m.n}. ${esc(m.titulo)}</div><span class="muted small">${m.cartas.length} tarjetas</span></button>`).join('')}</div></div>`;
+}
+function cardById(id){for(const m of MODULOS){const c=m.cartas.find(c=>c.id===id);if(c)return{c,m}}}
+function renderCard(){
+  if(!RQ.cola.length){view().innerHTML=`<div class="fade card" style="text-align:center"><div style="font-size:3rem">🎉</div><h2>¡Sesión terminada!</h2><p class="muted">${RQ.hechas} tarjetas revisadas. Ahora deja que el sueño haga su parte: la consolidación ocurre de noche.</p><button class="btn pri" onclick="go('repasar')">Volver</button></div>`;return}
+  const id=RQ.cola[0],{c,m}=cardById(id),st=S.cards[id];
+  view().innerHTML=`<div class="fade"><div class="qhead"><button class="ib" onclick="go('repasar')">✕</button><span class="small muted">${esc(RQ.titulo)}</span><span class="mono am">${RQ.cola.length}</span></div>
+  <div class="flash" id="fl"><div class="in"><div class="fc front"><small>Cap. ${m.n}${st&&!RQ.practica?' · caja '+st.caja:''}</small>${esc(c.f)}<div class="small muted" style="margin-top:14px;font-weight:400">Responde en voz alta y toca para voltear</div></div><div class="fc back"><small>Respuesta</small>${esc(c.b)}</div></div></div>
+  <div id="cbt" style="display:none" class="row"><button class="btn grow" style="border-color:var(--bad)" id="no">😕 No lo sabía</button><button class="btn pri grow" id="si">😎 Lo sabía</button></div></div>`;
+  $('#fl').onclick=()=>{$('#fl').classList.add('flip');$('#cbt').style.display='flex'};
+  $('#no').onclick=()=>grade(false);$('#si').onclick=()=>grade(true);
+}
+function grade(ok){
+  const id=RQ.cola.shift();RQ.hechas++;
+  if(!RQ.practica){const st=S.cards[id];
+    if(ok){if(!RQ.falladas.has(id)){st.caja=Math.min(5,st.caja+1);st.prox=now()+INTERVALO[st.caja]*DAY;st.ok++}else{st.prox=now()+DAY}}
+    else{st.caja=1;st.ko++;RQ.falladas.add(id);RQ.cola.push(id)}
+    R.tarjetas.put(st)}
+  else if(!ok)RQ.cola.push(id);
+  renderCard();
+}
+
+/* ========== Vista: Charla (planificar, autoevaluar, historial) ========== */
+let plan={};
+function vCharla(sub){
+  sub=sub||'plan';
+  const tabs=`<div class="seg" style="margin-bottom:14px">${[['plan','✍️ Planificar'],['eval','✅ Autoevaluar'],['hist','📈 Historial']].map(([k,n])=>`<button class="${sub===k?'on':''}" onclick="go('charla/${k}')">${n}</button>`).join('')}</div>`;
+  if(sub==='plan')return planView(tabs);
+  if(sub==='eval')return evalView(tabs);
+  histView(tabs);
+}
+const PLANF=[['tema','Tema','Ej.: Línea de fuego en izaje'],['publico','Público y contexto','Ej.: 15 riggers y operadores, muelle, 6:30 a.m., ruido de motores'],['mensaje','Mensaje central (una conducta, menos de 15 palabras)','Ej.: Nadie se para debajo de una carga suspendida'],['gancho','Gancho de apertura','Pregunta, final anunciado, confesión u objeto real'],['p1','Idea 1 (por qué importa)',''],['p2','Idea 2 (cómo se hace)',''],['p3','Idea 3 (qué pasa si no) · opcional',''],['prueba','Prueba: historia, objeto o demostración',''],['verif','Verificación (teach-back o demostración inversa)','Ej.: Wilder, muéstrame dónde te pararías'],['compromiso','Compromiso para hoy',''],['proximo','Gancho para la próxima charla','Ej.: Mañana les cuento qué encontramos en la eslinga']];
+function planView(tabs){
+  const planes=S.charlas.filter(c=>c.tipo==='plan').reverse();
+  view().innerHTML=`<div class="fade">${tabs}<div class="card"><h3>Planifica con la estructura del cerebro</h3><p class="small muted" style="margin:0">Gancho → mensaje → máximo 3 ideas → prueba → verificación → compromiso.</p>
+  ${PLANF.map(([k,l,ph])=>`<label class="f">${l}</label>${['gancho','prueba','publico'].includes(k)?`<textarea class="t" data-k="${k}" placeholder="${esc(ph)}">${esc(plan[k]||'')}</textarea>`:`<input class="t" data-k="${k}" placeholder="${esc(ph)}" value="${esc(plan[k]||'')}">`}${k==='mensaje'?'<div class="small" id="wc"></div>':''}`).join('')}
+  <div class="row" style="margin-top:14px"><button class="btn grow" id="gen">Ver guion</button><button class="btn pri grow" id="sv">Guardar plan</button></div></div>
+  ${planes.length?`<div class="card"><h3>Planes guardados</h3>${planes.map(p=>`<div class="row small" style="padding:7px 0;border-bottom:1px solid var(--line)"><span class="grow">${esc(p.plan.tema||'(sin tema)')}<br><span class="muted">${fmtF(p.fecha)}</span></span><button class="btn speak" onclick="loadPlan(${p.id})">Abrir</button><button class="btn speak" onclick="delCharla(${p.id},'plan')">🗑</button></div>`).join('')}</div>`:''}</div>`;
+  const wc=()=>{const n=(plan.mensaje||'').trim().split(/\s+/).filter(Boolean).length;$('#wc').innerHTML=n?`<span class="${n<15?'okc':'badc'}">${n} palabras ${n<15?'✓':'· recórtalo, todavía no sabes qué quieres decir'}</span>`:''};
+  $$('[data-k]').forEach(i=>i.addEventListener('input',()=>{plan[i.dataset.k]=i.value;if(i.dataset.k==='mensaje')wc()}));wc();
+  $('#gen').onclick=()=>modal(`<h3>Guion de 5 minutos</h3><pre class="guion">${esc(guion())}</pre><div class="row"><button class="btn grow" onclick="closeModal()">Cerrar</button><button class="btn pri grow" onclick="copyTxt(guion())">Copiar</button></div>`);
+  $('#sv').onclick=async()=>{if(!plan.tema&&!plan.mensaje)return toast('Escribe al menos el tema o el mensaje');const r={tipo:'plan',fecha:now(),plan:{...plan}};r.id=await R.charlas.put(r);S.charlas.push(r);toast('Plan guardado');vCharla('plan')};
+}
+function guion(){const p=plan,L=[];
+  L.push(`CHARLA: ${p.tema||'(pendiente)'}`);if(p.publico)L.push(`Público: ${p.publico}`);L.push('');
+  L.push(`[0:00] GANCHO\n${p.gancho||'(pregunta, objeto o final anunciado)'}`);
+  L.push(`\n[0:30] MENSAJE CENTRAL\n«${p.mensaje||'(pendiente)'}»`);
+  L.push(`\n[1:00] IDEAS\n1. ${p.p1||'(pendiente)'}\n2. ${p.p2||'(pendiente)'}${p.p3?'\n3. '+p.p3:''}`);
+  L.push(`\nPRUEBA\n${p.prueba||'(historia, objeto o demostración)'}`);
+  L.push(`\n[3:00] VERIFICACIÓN\n${p.verif||'(pendiente)'}\n(espera 5 segundos después de preguntar)`);
+  L.push(`\n[4:00] COMPROMISO Y CIERRE\n${p.compromiso||'¿Qué harás distinto hoy?'}\nRepite: «${p.mensaje||'(pendiente)'}»${p.proximo?'\nGancho: '+p.proximo:''}`);
+  L.push('\n[5:00] Firma de asistencia');return L.join('\n')}
+window.loadPlan=id=>{const p=S.charlas.find(c=>c.id===id);if(p){plan={...p.plan};vCharla('plan');toast('Plan cargado')}};
+window.delCharla=async(id,sub)=>{if(!confirm('¿Eliminar?'))return;await R.charlas.del(id);S.charlas=S.charlas.filter(c=>c.id!==id);vCharla(sub)};
+let ev={};
+function evalView(tabs){
+  ev.pts=ev.pts||Array(RUBRICA.length).fill(0);
+  view().innerHTML=`<div class="fade">${tabs}<div class="card"><h3>Autoevalúa tu última charla real</h3><p class="small muted" style="margin:0">1 = no lo hice · 2 = a medias · 3 = bien · 4 = excelente. Sé honesto: esto es para ti.</p>
+  <label class="f">Fecha</label><input class="t" type="date" id="ef" value="${ev.f||new Date().toISOString().slice(0,10)}">
+  <label class="f">Tema</label><input class="t" id="et" value="${esc(ev.t||'')}" placeholder="Ej.: Línea de fuego">
+  <div style="margin-top:8px">${RUBRICA.map((r,i)=>`<div class="rub"><div class="small">${i+1}. ${esc(r)}</div><div class="lv">${[1,2,3,4].map(v=>`<button data-i="${i}" data-v="${v}" class="${ev.pts[i]===v?'on':''}">${v}</button>`).join('')}</div></div>`).join('')}</div>
+  <label class="f">¿Qué mejoro en la próxima?</label><textarea class="t" id="en">${esc(ev.n||'')}</textarea>
+  <label class="f">Observación de campo (nivel 3): ¿viste la conducta aplicada días después?</label><select class="t" id="eo"><option value="">Aún no observé</option><option value="si">Sí, la vi aplicada</option><option value="parcial">Parcialmente</option><option value="no">No se aplica</option></select>
+  <button class="btn pri full" style="margin-top:14px" id="es">Guardar autoevaluación</button></div></div>`;
+  $$('.lv button').forEach(b=>b.onclick=()=>{ev.pts[+b.dataset.i]=+b.dataset.v;$$(`.lv button[data-i="${b.dataset.i}"]`).forEach(x=>x.classList.toggle('on',x===b))});
+  ['ef','et','en'].forEach(k=>$('#'+k).addEventListener('input',e=>ev[k[1]]=e.target.value));
+  $('#es').onclick=async()=>{if(ev.pts.some(v=>!v))return toast('Califica los 10 criterios');
+    const sum=ev.pts.reduce((a,b)=>a+b,0);const r={tipo:'eval',fecha:new Date($('#ef').value+'T12:00').getTime()||now(),tema:$('#et').value,pts:[...ev.pts],pct:(sum-10)/30*100,nota:$('#en').value,obs:$('#eo').value};
+    r.id=await R.charlas.put(r);S.charlas.push(r);S.charlas.sort((a,b)=>a.fecha-b.fecha);ev={};toast('Guardado');go('charla/hist')};
+}
+function histView(tabs){
+  const es=S.charlas.filter(c=>c.tipo==='eval');
+  let body='<p class="small muted">Aún no hay autoevaluaciones. Después de tu próxima charla, regístrala en "Autoevaluar".</p>';
+  if(es.length){
+    const avg=RUBRICA.map((_,i)=>es.reduce((a,e)=>a+e.pts[i],0)/es.length);
+    const weak=avg.map((v,i)=>[v,i]).sort((a,b)=>a[0]-b[0]).slice(0,2);
+    const pts=es.slice(-12),X=i=>20+i*(310/Math.max(1,pts.length-1)),Y=p=>110-p;
+    body=`<div class="grid2"><div class="stat"><b>${es.length}</b><span>Charlas registradas</span></div><div class="stat"><b>${Math.round(es.reduce((a,e)=>a+e.pct,0)/es.length)}%</b><span>Promedio</span></div></div>
+    <svg class="chart" viewBox="0 0 340 125" style="margin-top:10px"><line x1="10" x2="335" y1="${Y(70)}" y2="${Y(70)}" stroke="#26262d" stroke-dasharray="4 3"/>${pts.length>1?`<polyline points="${pts.map((e,i)=>X(i)+','+Y(e.pct)).join(' ')}" fill="none" stroke="#06b6d4" stroke-width="2.5"/>`:''}${pts.map((e,i)=>`<circle cx="${X(i)}" cy="${Y(e.pct)}" r="4" fill="#f59e0b"/>`).join('')}</svg>
+    <div class="callout amber"><b>Enfoca tu práctica en:</b><ul>${weak.map(([v,i])=>`<li>${esc(RUBRICA[i])} <span class="mono muted">(${v.toFixed(1)}/4)</span></li>`).join('')}</ul></div>
+    ${es.slice().reverse().map(e=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><div class="row small"><span class="grow"><b>${esc(e.tema||'(sin tema)')}</b><br><span class="muted">${fmtF(e.fecha)}${e.obs?' · campo: '+({si:'aplicada ✓',parcial:'parcial',no:'no aplicada'}[e.obs]):''}</span></span><b class="mono ${e.pct>=70?'okc':'am'}">${Math.round(e.pct)}%</b><button class="btn speak" onclick="delCharla(${e.id},'hist')">🗑</button></div>${e.nota?`<div class="small cy">→ ${esc(e.nota)}</div>`:''}</div>`).join('')}`;
+  }
+  view().innerHTML=`<div class="fade">${tabs}<div class="card"><h3>Tu evolución como comunicador</h3>${body}</div></div>`;
+}
+
+/* ========== Vista: Ajustes ========== */
+function vAjustes(){
+  view().innerHTML=`<div class="fade"><h2>⚙️ Ajustes</h2><div class="card">
+  <label class="f">Tu nombre (para el saludo)</label><input class="t" id="an" value="${esc(S.cfg.nombre)}">
+  <div class="sw"><span>Vibración al tocar</span><button class="tg ${S.cfg.vib?'on':''}" data-c="vib"></button></div>
+  <div class="sw"><span>Texto grande</span><button class="tg ${S.cfg.big?'on':''}" data-c="big"></button></div>
+  <label class="f">Velocidad de lectura en voz alta: <b id="rv">${S.cfg.rate}</b></label><input type="range" min="0.7" max="1.4" step="0.1" value="${S.cfg.rate}" id="ar" style="width:100%;accent-color:#f59e0b">
+  </div>
+  <div class="card"><h3>Respaldo</h3><p class="small muted">Tus datos viven solo en este dispositivo. Exporta un respaldo antes de cambiar de teléfono o borrar el navegador.</p>
+  <div class="row"><button class="btn grow" id="ex">⬇️ Exportar</button><label class="btn grow">⬆️ Importar<input type="file" accept=".json" id="im" hidden></label></div>
+  <button class="btn full" style="margin-top:10px;border-color:var(--bad);color:var(--bad)" id="rs">Borrar todo mi progreso</button></div>
+  <p class="small muted" style="text-align:center">NeuroComunica v1.0 · Personajes de los relatos ficticios; datos científicos con autor y año para que puedas verificarlos.</p></div>`;
+  $('#an').oninput=e=>{S.cfg.nombre=e.target.value.trim();saveCfg()};
+  $$('.tg').forEach(b=>b.onclick=()=>{const k=b.dataset.c;S.cfg[k]=!S.cfg[k];b.classList.toggle('on',S.cfg[k]);if(k==='big')document.documentElement.classList.toggle('big',S.cfg.big);saveCfg()});
+  $('#ar').oninput=e=>{S.cfg.rate=+e.target.value;$('#rv').textContent=S.cfg.rate;saveCfg()};
+  $('#ex').onclick=()=>{const data={app:'neurocomunica',v:1,fecha:now(),cfg:S.cfg,prog:S.prog,cards:Object.values(S.cards),intentos:S.intentos,charlas:S.charlas};const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'}));a.download=`neurocomunica-respaldo-${new Date().toISOString().slice(0,10)}.json`;a.click()};
+  $('#im').onchange=async e=>{try{const d=JSON.parse(await e.target.files[0].text());if(d.app!=='neurocomunica')throw 0;if(!confirm('Esto reemplaza tu progreso actual. ¿Continuar?'))return;
+    for(const r of Object.values(R))await r.clear();await R.kv.put({k:'cfg',v:d.cfg});await R.kv.put({k:'prog',v:d.prog});for(const c of d.cards)await R.tarjetas.put(c);for(const a of d.intentos)await R.intentos.put(a);for(const c of d.charlas)await R.charlas.put(c);toast('Respaldo importado');setTimeout(()=>location.reload(),700)}catch(err){toast('Archivo no válido')}};
+  $('#rs').onclick=async()=>{if(!confirm('¿Borrar todo tu progreso, intentos, tarjetas y charlas? No se puede deshacer.'))return;for(const r of Object.values(R))await r.clear();location.hash='';location.reload()};
+}
+
+/* ========== Modal y copia ========== */
+function modal(h){closeModal();const m=document.createElement('div');m.className='modal';m.id='mdl';m.innerHTML=`<div class="card">${h}</div>`;m.onclick=e=>{if(e.target===m)closeModal()};document.body.appendChild(m)}
+function closeModal(){$('#mdl')?.remove()}
+async function copyTxt(t){try{await navigator.clipboard.writeText(t);toast('Copiado')}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();toast('Copiado')}}
+Object.assign(window,{go,closeModal,copyTxt});
+
+/* ========== Arranque ========== */
+(async()=>{
+  await load();
+  $$('nav.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  window.addEventListener('hashchange',route);route();
+  if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script>
+</body>
+</html>
